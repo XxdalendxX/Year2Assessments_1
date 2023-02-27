@@ -206,7 +206,7 @@ MonoBehaviour:
   speed: 10
   JumpInput: 0
   velocity: {x: 0, y: 0, z: 0}
-  gravy: 9.8
+  gravy: -9.8
   jumpVelocity: 5
   isGrounded: 0
   groundCheck: {fileID: 1724046379}

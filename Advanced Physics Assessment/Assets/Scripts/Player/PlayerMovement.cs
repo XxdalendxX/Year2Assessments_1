@@ -55,9 +55,6 @@ public class PlayerMovement : MonoBehaviour
 
         controller.Move(move * speed * Time.deltaTime);
 
-
-        speed = 25f;
-
         velocity.y += gravy * Time.deltaTime;
 
         controller.Move(velocity * Time.deltaTime);
