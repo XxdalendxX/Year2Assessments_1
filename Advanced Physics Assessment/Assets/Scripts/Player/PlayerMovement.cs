@@ -11,21 +11,33 @@ public class PlayerMovement : MonoBehaviour
     [Header("Movement")]
 
         //public
-    [SerializeField, Range(1, 25)] float speed = 10;
+    [SerializeField, Range(1, 25)] float playerSpeed = 10;
     [SerializeField, Range(1, 25)] float jumpHeight = 5;
-    [SerializeField, Range(1, 15)] float gravity = 9.8f;
+    [SerializeField, Range(1, 15)] float gravityForce = 9.8f;
 
         //private
     bool jumpInput;
     [SerializeField] Vector3 velocity;
     Vector2 moveInput = new Vector2();
-    
+    Vector3 hitDirection;
+
+    [Space]
+    [SerializeField] float mass = 0f;
 
     [Header("Checks")]
 
         //public
     [SerializeField] bool isGrounded;
 
+
+    void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        hitDirection = hit.point - transform.position;
+        if (hit.rigidbody)
+        {
+            hit.rigidbody.AddForceAtPosition(velocity * mass, hit.point);
+        }
+    }
 
     void Start()
     {
@@ -47,7 +59,7 @@ public class PlayerMovement : MonoBehaviour
         Vector3 delta;
 
         //Movement through WASD and the arrow keys
-        delta = (moveInput.x * Vector3.right + moveInput.y * Vector3.forward) * speed * Time.fixedDeltaTime;
+        delta = (moveInput.x * Vector3.right + moveInput.y * Vector3.forward) * playerSpeed * Time.fixedDeltaTime;
         if (isGrounded || moveInput.x != 0 || moveInput.y != 0)
         {
             velocity.x = delta.x;
@@ -68,12 +80,32 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //Applies gravity
-        velocity.y -= gravity * Time.fixedDeltaTime;
+        velocity.y -= gravityForce * Time.fixedDeltaTime;
 
+        if (!isGrounded)
+        {
+            hitDirection = Vector3.zero;
+        }
+
+        //Slide objects off surfaces they're hanging on to
+        if (moveInput.x == 0 &&moveInput.y == 0)
+        {
+            Vector3 horizontalHitDirection = hitDirection;
+            horizontalHitDirection.y = 0;
+            float displacement = horizontalHitDirection.magnitude;
+            if (displacement > 0)
+            {
+                velocity -= 0.2f * horizontalHitDirection / displacement;
+            }
+        }
 
         Vector3 move = transform.right * moveInput.x + transform.forward * moveInput.y;
 
-        controller.Move(move * speed * Time.fixedDeltaTime);
+        if (transform.parent == null)
+        {
+
+        }
+        controller.Move(move * playerSpeed * Time.fixedDeltaTime);
 
 
         controller.Move(velocity * Time.fixedDeltaTime);
@@ -81,7 +113,7 @@ public class PlayerMovement : MonoBehaviour
 
     float Jump()
     {
-        return Mathf.Sqrt(2 * gravity * jumpHeight);
+        return Mathf.Sqrt(2 * gravityForce * jumpHeight);
     }
 }
 
