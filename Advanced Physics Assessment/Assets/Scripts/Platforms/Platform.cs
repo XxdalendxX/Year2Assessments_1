@@ -8,13 +8,21 @@ public class Platform : MonoBehaviour
     Transform startPos, endPos;
     [SerializeField] float speed = 3f;
     [SerializeField] bool _switch = false;
-    [SerializeField] GameObject player = null;
 
- 
+    Rigidbody rb;
+    CharacterController cc;
+
     [SerializeField] Vector3 velocity;
+
+    private void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
 
     private void FixedUpdate()
     {
+        
+        
         Vector3 initialPosition = transform.position;
         Vector3 finalPosition;
         if (!_switch)
@@ -22,14 +30,12 @@ public class Platform : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position, endPos.position, speed * Time.fixedDeltaTime);
             finalPosition = transform.position;
             velocity = GetVelocity(initialPosition, finalPosition);
-            if (player != null) { player.transform.position = Vector3.MoveTowards(player.transform.position, finalPosition, speed * Time.fixedDeltaTime); }
         }
         else if (_switch)
         {
             transform.position = Vector3.MoveTowards(transform.position, startPos.position, speed * Time.fixedDeltaTime);
             finalPosition = transform.position;
             velocity = GetVelocity(initialPosition, finalPosition);
-            if (player != null) { player.transform.position = Vector3.MoveTowards(player.transform.position, finalPosition, speed * Time.fixedDeltaTime); }
         }
 
             if (transform.position == endPos.position)
@@ -43,9 +49,16 @@ public class Platform : MonoBehaviour
     {
        if (other.CompareTag("Player"))
        {
+            cc = other.GetComponent<CharacterController>();
             other.transform.parent = this.transform;
-            player = other.gameObject;
        }
+    }
+    void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            cc.Move(rb.velocity * Time.deltaTime);
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -53,7 +66,7 @@ public class Platform : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             other.transform.parent = null;
-            player = null;
+            cc = null;
         }
     }
 
