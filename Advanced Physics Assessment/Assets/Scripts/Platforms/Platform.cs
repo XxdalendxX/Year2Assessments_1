@@ -53,11 +53,14 @@ public class Platform : MonoBehaviour
             other.transform.parent = this.transform;
        }
     }
-    void OnTriggerStay(Collider other)
+    void OnCollisionStay(Collision other)
     {
-        if (other.CompareTag("Player"))
+        if (other.collider.CompareTag("Player"))
         {
-            cc.Move(rb.velocity * Time.deltaTime);
+            if(cc.isGrounded)
+            {
+                cc.Move(rb.velocity * Time.deltaTime);
+            }
         }
     }
 
