@@ -53,7 +53,7 @@ public class Platform : MonoBehaviour
             other.transform.parent = this.transform;
        }
     }
-    void OnCollisionStay(Collision other)
+    /*void OnCollisionStay(Collision other)
     {
         if (other.collider.CompareTag("Player"))
         {
@@ -62,7 +62,7 @@ public class Platform : MonoBehaviour
                 cc.Move(rb.velocity * Time.deltaTime);
             }
         }
-    }
+    }*/
 
     private void OnTriggerExit(Collider other)
     {

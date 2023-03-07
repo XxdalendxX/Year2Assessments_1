@@ -13,7 +13,7 @@ public class CameraController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
@@ -30,5 +30,14 @@ public class CameraController : MonoBehaviour
 
         transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
         playerBody.Rotate(Vector3.up * mouseX);
+
+        if (Input.GetKey(KeyCode.LeftControl))
+        {
+            Cursor.lockState = CursorLockMode.None;
+        }
+        else if (Input.GetKeyUp(KeyCode.LeftControl))
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+        }
     }
 }
