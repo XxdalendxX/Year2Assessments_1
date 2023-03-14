@@ -4,7 +4,10 @@
     <Filter Include="Graphics Renderer">
       <UniqueIdentifier>{38d8eb39-6cc0-430c-a968-79c93465a82b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Graphics Renderer\GLAD">
+    <Filter Include="Third Party">
+      <UniqueIdentifier>{92cce731-553c-42c0-9147-0a8e6a91e0a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Third Party\GLAD">
       <UniqueIdentifier>{42dd0032-10ae-41fc-9751-3caedbc113a6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -13,15 +16,25 @@
       <Filter>Graphics Renderer</Filter>
     </ClCompile>
     <ClCompile Include="glad.c">
-      <Filter>Graphics Renderer\GLAD</Filter>
+      <Filter>Third Party\GLAD</Filter>
     </ClCompile>
+    <ClCompile Include="Utilities.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="glad.h">
-      <Filter>Graphics Renderer\GLAD</Filter>
+      <Filter>Third Party\GLAD</Filter>
     </ClInclude>
     <ClInclude Include="khrplatform.h">
-      <Filter>Graphics Renderer\GLAD</Filter>
+      <Filter>Third Party\GLAD</Filter>
+    </ClInclude>
+    <ClInclude Include="Utilities.h">
+      <Filter>Graphics Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics.h">
+      <Filter>Graphics Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderProgram.h">
+      <Filter>Graphics Renderer</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,7 +1,6 @@
-//These includes are specific to the way that gGLFW and GLAD has been set up
-#define GLFW_INCLUDE_NONE
-#include "glfw3.h"
-#include "glad.h"
+#include "Graphics.h"
+#include "Utilities.h"
+#include <iostream>
 
 int main(void)
 {
@@ -27,16 +26,35 @@ int main(void)
 	//Tell GLAD to load all it's OpenGL functions
 	if (!gladLoadGL())
 	{
+		glfwTerminate();
 		return -1;
 	}
+
+	float red = 0.5f;
+	float green = 0.0f;
+	float blue = 0.5f;
+
+	std::cout << LoadFileAsString("BigBrianText.txt") << std::endl;
 
 	//Main game loop
 	while (!glfwWindowShouldClose(window))
 	{
 		//Clear the screen - to do rendering later
 		glClear(GL_COLOR_BUFFER_BIT);
+
+		//Gets the cursor position and then assigns the window colour accordingly  
+		double cursorX, cursorY;
+		int width, height;
+		glfwGetWindowSize(window, &width, &height);
+		glfwGetCursorPos(window, &cursorX, &cursorY);
+		red = float(cursorX) / width;
+		green = float(cursorY) / height;
+		blue = (red + green) / 2;
+		glClearColor(red, green, blue, 1.0);
+
 		//Swapping the buffers - means current frame is over
 		glfwSwapBuffers(window);
+
 		//Tell GLFW to check for current imputs/events.
 		glfwPollEvents();
 	}
