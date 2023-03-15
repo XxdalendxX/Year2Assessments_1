@@ -1,5 +1,6 @@
 #include "Graphics.h"
 #include "Utilities.h"
+#include "DebugCallback.h"
 #include <iostream>
 
 int main(void)
@@ -11,6 +12,10 @@ int main(void)
 	{
 		return -1;
 	}
+
+#ifdef _DEBUG
+	glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GLFW_TRUE);
+#endif
 
 	//Set resolution and application name here.
 	window = glfwCreateWindow(1280, 720, "I will indeed copy this", nullptr, nullptr);
@@ -57,6 +62,12 @@ int main(void)
 
 		//Tell GLFW to check for current imputs/events.
 		glfwPollEvents();
+
+#ifdef _DEBUG
+		glEnable(GL_DEBUG_OUTPUT);
+		glDebugMessageCallback(nullptr, nullptr);
+#endif
+
 	}
 
 	//At this point the window should close and clean up of GLFW and exiting goes here

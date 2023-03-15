@@ -19,6 +19,8 @@
       <Filter>Third Party\GLAD</Filter>
     </ClCompile>
     <ClCompile Include="Utilities.cpp" />
+    <ClCompile Include="ShaderProgram.cpp" />
+    <ClCompile Include="DebugCallback.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="glad.h">
@@ -34,6 +36,9 @@
       <Filter>Graphics Renderer</Filter>
     </ClInclude>
     <ClInclude Include="ShaderProgram.h">
+      <Filter>Graphics Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugCallback.h">
       <Filter>Graphics Renderer</Filter>
     </ClInclude>
   </ItemGroup>

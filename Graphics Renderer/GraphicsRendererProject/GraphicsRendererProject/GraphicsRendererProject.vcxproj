@@ -133,11 +133,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="DebugCallback.cpp" />
     <ClCompile Include="EntryPoint.cpp" />
     <ClCompile Include="glad.c" />
+    <ClCompile Include="ShaderProgram.cpp" />
     <ClCompile Include="Utilities.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="DebugCallback.h" />
     <ClInclude Include="glad.h" />
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="khrplatform.h" />
