@@ -34,5 +34,5 @@ protected:
 
 	int vCount; //Vertex count
 
-	bool loadedProperly; //Checks if mesh has loaded without problems
+	bool loadedProperly = false; //Checks if mesh has loaded without problems
 };
