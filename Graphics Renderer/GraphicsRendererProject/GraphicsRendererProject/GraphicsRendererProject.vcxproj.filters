@@ -10,22 +10,53 @@
     <Filter Include="Third Party\GLAD">
       <UniqueIdentifier>{42dd0032-10ae-41fc-9751-3caedbc113a6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Graphics Renderer\Tools">
+      <UniqueIdentifier>{a06b4bc3-9ac8-46b1-b728-048ba7791f2f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics Renderer\Object Renderer">
+      <UniqueIdentifier>{7d850223-c8e0-4b1e-8d3f-fb55816fb44a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics Renderer\Shader">
+      <UniqueIdentifier>{c0651a0c-7ac2-4ae4-b528-918eb1dfa32c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics Renderer\Tools\Utilities">
+      <UniqueIdentifier>{caaa5ca9-d1ec-4411-a645-97d162dfe002}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics Renderer\Tools\Vertex">
+      <UniqueIdentifier>{d6390221-4ea0-40db-b0d3-467add6a50de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics Renderer\Tools\Graphics">
+      <UniqueIdentifier>{d695a5bc-6317-4278-a8b7-d90396f96535}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics Renderer\Tools\Maths">
+      <UniqueIdentifier>{ae1ad961-f3f9-48d8-9392-9452def64771}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics Renderer\Object Renderer\Mesh">
+      <UniqueIdentifier>{9f3f1cf9-ef92-495a-9429-29b4ad9b4523}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics Renderer\Object Renderer\Texture">
+      <UniqueIdentifier>{9432f723-f5fe-4732-b001-2df14466210e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="EntryPoint.cpp">
-      <Filter>Graphics Renderer</Filter>
-    </ClCompile>
     <ClCompile Include="glad.c">
       <Filter>Third Party\GLAD</Filter>
     </ClCompile>
-    <ClCompile Include="DebugCallback.cpp">
-      <Filter>Graphics Renderer</Filter>
-    </ClCompile>
+    <ClCompile Include="EntryPoint.cpp" />
     <ClCompile Include="ShaderProgram.cpp">
-      <Filter>Graphics Renderer</Filter>
+      <Filter>Graphics Renderer\Shader</Filter>
     </ClCompile>
     <ClCompile Include="Utilities.cpp">
-      <Filter>Graphics Renderer</Filter>
+      <Filter>Graphics Renderer\Tools\Utilities</Filter>
+    </ClCompile>
+    <ClCompile Include="Vertex.cpp">
+      <Filter>Graphics Renderer\Tools\Vertex</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>Graphics Renderer\Object Renderer\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>Graphics Renderer\Object Renderer\Texture</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -35,17 +66,26 @@
     <ClInclude Include="khrplatform.h">
       <Filter>Third Party\GLAD</Filter>
     </ClInclude>
+    <ClInclude Include="ShaderProgram.h">
+      <Filter>Graphics Renderer\Shader</Filter>
+    </ClInclude>
     <ClInclude Include="Utilities.h">
-      <Filter>Graphics Renderer</Filter>
+      <Filter>Graphics Renderer\Tools\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Vertex.h">
+      <Filter>Graphics Renderer\Tools\Vertex</Filter>
+    </ClInclude>
+    <ClInclude Include="Maths.h">
+      <Filter>Graphics Renderer\Tools\Maths</Filter>
     </ClInclude>
     <ClInclude Include="Graphics.h">
-      <Filter>Graphics Renderer</Filter>
+      <Filter>Graphics Renderer\Tools\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="ShaderProgram.h">
-      <Filter>Graphics Renderer</Filter>
+    <ClInclude Include="Mesh.h">
+      <Filter>Graphics Renderer\Object Renderer\Mesh</Filter>
     </ClInclude>
-    <ClInclude Include="DebugCallback.h">
-      <Filter>Graphics Renderer</Filter>
+    <ClInclude Include="Texture.h">
+      <Filter>Graphics Renderer\Object Renderer\Texture</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

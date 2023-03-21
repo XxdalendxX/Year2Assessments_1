@@ -2,6 +2,10 @@
 #include "Utilities.h"
 #include <iostream>
 
+ShaderProgram::ShaderProgram()
+{
+}
+
 void ShaderProgram::LoadFromFiles(std::string vertexShaderName, std::string fragmentShaderName)
 {
 	loadedProperly = true;
@@ -87,4 +91,11 @@ void ShaderProgram::SetFloatUniform(std::string variableName, float value)
 	GLint varLoc = glGetUniformLocation(shaderProgramID, variableName.c_str());
 
 	glUniform1f(varLoc, value);
+}
+
+void ShaderProgram::SetMatrixUniform(std::string variableName, glm::mat4 value)
+{
+	GLint varLoc = glGetUniformLocation(shaderProgramID, variableName.c_str());
+
+	glUniformMatrix4fv(varLoc, 1, GL_FALSE, &value[0][0]);
 }

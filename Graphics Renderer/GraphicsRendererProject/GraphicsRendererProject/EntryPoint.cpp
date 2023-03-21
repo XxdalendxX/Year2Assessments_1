@@ -1,6 +1,8 @@
 #include "Graphics.h"
+#include "Maths.h"
 #include "Utilities.h"
-#include "DebugCallback.h"
+#include "ShaderProgram.h"
+#include "Mesh.h"
 #include <iostream>
 
 int main(void)
@@ -12,11 +14,7 @@ int main(void)
 	{
 		return -1;
 	}
-/*
-#ifdef _DEBUG
-	glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GLFW_TRUE);
-#endif
-*/
+
 	//Set resolution and application name here.
 	window = glfwCreateWindow(1280, 720, "I will indeed copy this", nullptr, nullptr);
 	if (!window)
@@ -35,39 +33,49 @@ int main(void)
 		return -1;
 	}
 
-	float red = 0.5f;
-	float green = 0.0f;
-	float blue = 0.5f;
+	printf("OpenGL version %i.%i\n", GLVersion.major, GLVersion.minor);
 
-	std::cout << LoadFileAsString("BigBrianText.txt") << std::endl;
+	ShaderProgram simpleShader;
+	simpleShader.LoadFromFiles("shader.vert", "shader.frag");
+
+	Mesh object;
+	object.CreatePyramid();
+
+	glEnable(GL_DEPTH_TEST);
+
+	glClearColor(0.0f, 0.0f, 0, 1);
 
 	//Main game loop
 	while (!glfwWindowShouldClose(window))
 	{
-		//Clear the screen - to do rendering later
-		glClear(GL_COLOR_BUFFER_BIT);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		//Gets the cursor position and then assigns the window colour accordingly  
-		double cursorX, cursorY;
+		simpleShader.Enable();
+
+		//allows for the rotation of or around the object
+		mat4 rotation = glm::rotate(mat4(1), (float)glfwGetTime(), vec3(0, 1, 0));
+
+		//where the camera is placed and facing
+		mat4 view = glm::lookAt(vec3(1, 1, 1), vec3(0, 0, 0), vec3(0, 1, 0));
+
+		float aspect;
 		int width, height;
 		glfwGetWindowSize(window, &width, &height);
-		glfwGetCursorPos(window, &cursorX, &cursorY);
-		red = float(cursorX) / width;
-		green = float(cursorY) / height;
-		blue = (red + green) / 2;
-		glClearColor(red, green, blue, 1.0);
+		aspect = width / (float)height;
+
+
+		glm::mat4 projection = glm::perspective(3.14159f / 4, aspect, 1.0f, 100.0f);
+
+		simpleShader.SetMatrixUniform("transformMatrix", projection * view * rotation);
+
+		object.Bind();
+		object.Render();
+		object.Unbind();
 
 		//Swapping the buffers - means current frame is over
 		glfwSwapBuffers(window);
-
 		//Tell GLFW to check for current imputs/events.
 		glfwPollEvents();
-/*
-#ifdef _DEBUG
-		glEnable(GL_DEBUG_OUTPUT);
-		glDebugMessageCallback(nullptr, nullptr);
-#endif
-*/
 	}
 
 	//At this point the window should close and clean up of GLFW and exiting goes here

@@ -27,4 +27,5 @@ public:
 	ShaderProgram& operator=(const ShaderProgram& other) = delete;
 
 	void SetFloatUniform(std::string variableName, float value);
+	void SetMatrixUniform(std::string variableName, glm::mat4 value);
 };
