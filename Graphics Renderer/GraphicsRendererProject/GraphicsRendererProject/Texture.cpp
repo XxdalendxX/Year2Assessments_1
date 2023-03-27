@@ -1,3 +1,4 @@
+#include "Image.h"
 #include "Texture.h"
 
 Texture::Texture()
@@ -18,5 +19,9 @@ void Texture::LoadFromFile(std::string filename)
 }
 
 void Texture::Bind(int textureUnit) const
+{
+}
+
+void Texture::Unbind(int textureUnit)
 {
 }

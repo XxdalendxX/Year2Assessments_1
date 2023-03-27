@@ -37,6 +37,9 @@
     <Filter Include="Graphics Renderer\Object Renderer\Texture">
       <UniqueIdentifier>{9432f723-f5fe-4732-b001-2df14466210e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Graphics Renderer\Tools\Image">
+      <UniqueIdentifier>{64dd7d2b-4e03-433b-9c7e-8efe041b5537}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="glad.c">
@@ -86,6 +89,12 @@
     </ClInclude>
     <ClInclude Include="Texture.h">
       <Filter>Graphics Renderer\Object Renderer\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="Image.h">
+      <Filter>Graphics Renderer\Tools\Image</Filter>
+    </ClInclude>
+    <ClInclude Include="stb_image.h">
+      <Filter>Graphics Renderer\Tools\Image</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
