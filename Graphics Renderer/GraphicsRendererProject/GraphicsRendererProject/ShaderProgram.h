@@ -3,6 +3,7 @@
 #include "glm.hpp"
 #include <string>
 #include "Graphics.h"
+#include "Maths.h"
 
 class ShaderProgram
 {
@@ -29,8 +30,12 @@ public:
 	ShaderProgram(const ShaderProgram& other) = delete;
 	ShaderProgram& operator=(const ShaderProgram& other) = delete;
 
-	//sets the float uniform of a variable in a shader file
+	//sets the Float uniform of a variable in a shader file
 	void SetFloatUniform(std::string variableName, float value);
 	//sets the Matrix uniform of a variable in a shader file
-	void SetMatrixUniform(std::string variableName, glm::mat4 value);
+	void SetMatrixUniform(std::string variableName, mat4 value);
+	//sets the Vector uniform of a variable in a shader file
+	void SetVectorUniform(std::string variableName, vec3 value);
+	//sets the Integer uniform of a variable in a shader file
+	void SetIntergerUniform(std::string variableName, int value);
 };

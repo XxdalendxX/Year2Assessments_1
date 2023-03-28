@@ -38,14 +38,14 @@ void ShaderProgram::LoadFromFiles(std::string vertexShaderName, std::string frag
 	glGetShaderiv(vertexShaderID, GL_COMPILE_STATUS, &successStatus);
 	if (successStatus == GL_FALSE)
 	{
-		std::cout << "Oh nooo~... Vertex shader compilation failed for whatever reason." << std::endl;
+		std::cout << "Vertex shader compilation failed for whatever reason." << std::endl;
 		glGetShaderInfoLog(vertexShaderID, 555, nullptr, errorLog);
 		std::cout << errorLog << std::endl;
 		loadedProperly = false;
 	}
 	else
 	{
-		std::cout << "Yeah, vertex shader's doing a-okay." << std::endl;
+		std::cout << "Vertex shader's doing a-okay." << std::endl;
 	}
 
 	//fragment shader code converted to a C string
@@ -60,14 +60,14 @@ void ShaderProgram::LoadFromFiles(std::string vertexShaderName, std::string frag
 	glGetShaderiv(fragmentShaderID, GL_COMPILE_STATUS, &successStatus);
 	if (successStatus == GL_FALSE)
 	{
-		std::cout << "Oopsie... Fragment shader compilation has crashed and burned for some reason." << std::endl;
+		std::cout << "Fragment shader compilation has crashed and burned for some reason." << std::endl;
 		glGetShaderInfoLog(fragmentShaderID, 555, nullptr, errorLog);
 		std::cout << errorLog << std::endl;
 		loadedProperly = false;
 	}
 	else
 	{
-		std::cout << "Good news, fragment shader has not crashed and burned... Yet." << std::endl;
+		std::cout << "Fragment shader has not crashed and burned... Yet." << std::endl;
 	}
 
 	//Attaches the vertex shader to the shader program
@@ -82,7 +82,7 @@ void ShaderProgram::LoadFromFiles(std::string vertexShaderName, std::string frag
 
 	if (successStatus == GL_FALSE)
 	{
-		std::cout << "Ah well... Shader link has been unsuccessfully completed for one reason or another." << std::endl;
+		std::cout << "Shader link has been unsuccessfully completed for one reason or another." << std::endl;
 		glGetShaderInfoLog(shaderProgramID, 555, nullptr, errorLog);
 		std::cout << errorLog << std::endl;
 		loadedProperly = false;
@@ -91,7 +91,7 @@ void ShaderProgram::LoadFromFiles(std::string vertexShaderName, std::string frag
 	//Returns console text if everything compiled and linked properly
 	if (loadedProperly)
 	{
-		std::cout << "So here's the thing... The shader has indeed loaded properly." << std::endl;
+		std::cout << "The shader has indeed linked properly." << std::endl;
 	}
 }
 
@@ -109,14 +109,36 @@ ShaderProgram::~ShaderProgram()
 
 void ShaderProgram::SetFloatUniform(std::string variableName, float value)
 {
+	//Variable location
 	GLint varLoc = glGetUniformLocation(shaderProgramID, variableName.c_str());
 
+	//gl uniform 1 float
 	glUniform1f(varLoc, value);
 }
 
-void ShaderProgram::SetMatrixUniform(std::string variableName, glm::mat4 value)
+void ShaderProgram::SetMatrixUniform(std::string variableName, mat4 value)
 {
+	//Variable location
 	GLint varLoc = glGetUniformLocation(shaderProgramID, variableName.c_str());
 
+	//gl uniform matrix 4 float vector
 	glUniformMatrix4fv(varLoc, 1, GL_FALSE, &value[0][0]);
+}
+
+void ShaderProgram::SetVectorUniform(std::string variableName, vec3 value)
+{
+	//Variable location
+	GLint varLoc = glGetUniformLocation(shaderProgramID, variableName.c_str());
+
+	//gl uniform 3 float
+	glUniform3f(varLoc, value.x, value.y, value.z);
+}
+
+void ShaderProgram::SetIntergerUniform(std::string variableName, int value)
+{
+	//Variable location
+	GLint varLoc = glGetUniformLocation(shaderProgramID, variableName.c_str());
+
+	//gl uniform 1 int
+	glUniform1i(varLoc, value);
 }

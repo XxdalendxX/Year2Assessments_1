@@ -10,8 +10,11 @@ class Texture
 	bool loadedProperly;
 
 public:
-	Texture();
+	//Constructor to be left empty
+	Texture() {};
+	//Constructor that will read the file
 	Texture(std::string filename);
+	//Deconstructor
 	~Texture();
 
 	//Loads texture from file

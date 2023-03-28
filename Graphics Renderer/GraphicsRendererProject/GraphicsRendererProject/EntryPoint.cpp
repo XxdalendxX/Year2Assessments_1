@@ -3,6 +3,7 @@
 #include "Utilities.h"
 #include "ShaderProgram.h"
 #include "Mesh.h"
+#include "Texture.h"
 #include <iostream>
 
 int main(void)
@@ -38,6 +39,7 @@ int main(void)
 	ShaderProgram simpleShader;
 	simpleShader.LoadFromFiles("shader.vert", "shader.frag");
 
+	Texture texture("Gaming.png");
 	Mesh object;
 	object.CreatePyramid();
 
@@ -63,14 +65,28 @@ int main(void)
 		glfwGetWindowSize(window, &width, &height);
 		aspect = width / (float)height;
 
+		//Projection Matrix
+		glm::mat4 projection = glm::perspective(PI / 4, aspect, 1.0f, 100.0f);
 
-		glm::mat4 projection = glm::perspective(3.14159f / 4, aspect, 1.0f, 100.0f);
+		//Movement vs Perspective Matrix
+		glm::mat4 mvpMatrix = projection * view * rotation;
 
-		simpleShader.SetMatrixUniform("transformMatrix", projection * view * rotation);
+		simpleShader.SetMatrixUniform("mvpMatrix", mvpMatrix);
+		simpleShader.SetMatrixUniform("mMatrix", rotation);
+		simpleShader.SetVectorUniform("lightDirection", glm::normalize(vec3(0, -1, -1)));
+
+		//Set the texture sampler uniform to the value corresponding to the active texture,
+		//NOT the texture ID.
+		simpleShader.SetIntergerUniform("textureSampler", 1);
+
+		texture.Bind(1);
 
 		object.Bind();
 		object.Render();
 		object.Unbind();
+
+		//done from texture class to avoid errors from
+		Texture::Unbind(1);
 
 		//Swapping the buffers - means current frame is over
 		glfwSwapBuffers(window);
