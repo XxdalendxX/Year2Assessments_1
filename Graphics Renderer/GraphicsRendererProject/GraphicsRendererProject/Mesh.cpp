@@ -1,4 +1,5 @@
 #include "Mesh.h"
+#include "Assimp.h"
 
 Mesh::~Mesh()
 {
@@ -61,6 +62,11 @@ void Mesh::CreatePyramid()
 		{{0.5, 0, 0.5},		{0.5, 0.30, 0},	{1, 1, 0},	{1, 0 }},
 	};
 	UploadMesh(vertices);
+}
+
+void Mesh::InitialiseFromFile(std::string filename)
+{
+
 }
 
 void Mesh::Bind()

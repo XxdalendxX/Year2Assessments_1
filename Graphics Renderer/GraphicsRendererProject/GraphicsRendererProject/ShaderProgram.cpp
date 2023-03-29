@@ -1,6 +1,5 @@
 #include "ShaderProgram.h"
 #include "Utilities.h"
-#include <iostream>
 
 ShaderProgram::ShaderProgram()
 {

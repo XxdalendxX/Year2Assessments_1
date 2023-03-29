@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Graphics.h"
-#include <string>
+#include "Text.h"
 
 class Texture
 {

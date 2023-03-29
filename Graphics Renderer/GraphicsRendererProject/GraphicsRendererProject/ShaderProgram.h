@@ -1,7 +1,7 @@
 #pragma once
 
 #include "glm.hpp"
-#include <string>
+#include "Text.h"
 #include "Graphics.h"
 #include "Maths.h"
 

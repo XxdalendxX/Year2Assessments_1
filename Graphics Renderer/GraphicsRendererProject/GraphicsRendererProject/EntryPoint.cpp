@@ -4,7 +4,7 @@
 #include "ShaderProgram.h"
 #include "Mesh.h"
 #include "Texture.h"
-#include <iostream>
+#include "Text.h"
 
 int main(void)
 {
@@ -39,7 +39,7 @@ int main(void)
 	ShaderProgram simpleShader;
 	simpleShader.LoadFromFiles("shader.vert", "shader.frag");
 
-	Texture texture("Gaming.png");
+	Texture texture("obamium.png");
 	Mesh object;
 	object.CreatePyramid();
 
@@ -72,7 +72,7 @@ int main(void)
 		glm::mat4 mvpMatrix = projection * view * rotation;
 
 		simpleShader.SetMatrixUniform("mvpMatrix", mvpMatrix);
-		simpleShader.SetMatrixUniform("mMatrix", rotation);
+		simpleShader.SetMatrixUniform("mMatrix", rotation);		//mMatrix = model matrix
 		simpleShader.SetVectorUniform("lightDirection", glm::normalize(vec3(0, -1, -1)));
 
 		//Set the texture sampler uniform to the value corresponding to the active texture,

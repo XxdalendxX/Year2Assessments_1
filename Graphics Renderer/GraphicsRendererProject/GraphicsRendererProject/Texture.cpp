@@ -1,6 +1,5 @@
 #include "Image.h"
 #include "Texture.h"
-#include <iostream>
 
 Texture::Texture(std::string filename)
 {

@@ -40,6 +40,9 @@
     <Filter Include="Graphics Renderer\Tools\Image">
       <UniqueIdentifier>{64dd7d2b-4e03-433b-9c7e-8efe041b5537}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Graphics Renderer\Tools\Text">
+      <UniqueIdentifier>{c10e8d0e-08e4-427c-9b30-b37a1c90ed5c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="glad.c">
@@ -95,6 +98,9 @@
     </ClInclude>
     <ClInclude Include="stb_image.h">
       <Filter>Graphics Renderer\Tools\Image</Filter>
+    </ClInclude>
+    <ClInclude Include="Text.h">
+      <Filter>Graphics Renderer\Tools\Text</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -2,6 +2,7 @@
 #include "Maths.h"
 #include "Graphics.h"
 #include "Vertex.h"
+#include "Text.h"
 
 class Mesh
 {
@@ -16,6 +17,8 @@ public:
 
 	//Creates a square based pyramid mesh
 	void CreatePyramid();
+	//initialises an imported mesh
+	void InitialiseFromFile(std::string filename);
 
 	//Generates and binds the vbo and the vao
 	void UploadMesh(std::vector<Vertex>& vertices);
