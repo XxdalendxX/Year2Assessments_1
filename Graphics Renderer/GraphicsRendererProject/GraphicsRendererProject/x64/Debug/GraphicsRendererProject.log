@@ -1,0 +1,9 @@
+﻿  EntryPoint.cpp
+  Mesh.cpp
+C:\Users\conno\Documents\Year2Assessments_1\Graphics Renderer\GraphicsRendererProject\GraphicsRendererProject\Mesh.cpp(15,26): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+  ShaderProgram.cpp
+  Texture.cpp
+  Utilities.cpp
+  Generating Code...
+LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
+  GraphicsRendererProject.vcxproj -> C:\Users\conno\Documents\Year2Assessments_1\Graphics Renderer\GraphicsRendererProject\x64\Debug\GraphicsRendererProject.exe
