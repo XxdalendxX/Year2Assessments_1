@@ -23,5 +23,8 @@ typedef glm::mat3 mat3;
 //matrix_4x4
 typedef glm::mat4 mat4;
 
+//Vertex
+//typedef std::vector<Vertex> Vertex;
+
 //the ratio of the circumference of any circle to the diameter of that circle.
 #define PI 3.14159265f

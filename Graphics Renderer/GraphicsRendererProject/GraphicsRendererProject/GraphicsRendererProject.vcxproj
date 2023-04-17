@@ -71,12 +71,12 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(SolutionDir)assimp/include;$(SolutionDir)assimp/out/build/x64-$(Configuration)\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)\assimp\out\build\x64-$(Configuration)\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)dep\assimp\include;$(SolutionDir)dep\assimp\out\build\x64-$(Configuration)\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)dep\assimp\out\build\x64-$(Configuration)\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>$(SolutionDir)assimp/include;$(SolutionDir)assimp/out/build/x64-$(Configuration)\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)\assimp\out\build\x64-$(Configuration)\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)dep\assimp\include;$(SolutionDir)dep\assimp\out\build\x64-$(Configuration)\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)dep\assimp\out\build\x64-$(Configuration)\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -118,7 +118,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)GLFW;</AdditionalLibraryDirectories>
-      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies); glfw3.lib;</AdditionalDependencies>
+      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);glfw3.lib;assimp-vc143-mtd.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -137,7 +137,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)GLFW;</AdditionalLibraryDirectories>
-      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies); glfw3.lib;</AdditionalDependencies>
+      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies);glfw3.lib;assimp-vc143-mt.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

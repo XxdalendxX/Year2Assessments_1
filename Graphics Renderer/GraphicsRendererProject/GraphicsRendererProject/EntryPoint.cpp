@@ -39,9 +39,11 @@ int main(void)
 	ShaderProgram simpleShader;
 	simpleShader.LoadFromFiles("shader.vert", "shader.frag");
 
-	Texture texture("obamium.png");
-	Mesh object;
-	object.CreatePyramid();
+	Texture texture("unnamed.png");
+	Mesh objectA;
+	Mesh objectB;
+	//objectA.CreatePyramid();
+	objectB.InitialiseFromFile("stanford/bunny.obj");
 
 	glEnable(GL_DEPTH_TEST);
 
@@ -81,9 +83,9 @@ int main(void)
 
 		texture.Bind(1);
 
-		object.Bind();
-		object.Render();
-		object.Unbind();
+		objectB.Bind();
+		objectB.Render();
+		objectB.Unbind();
 
 		//done from texture class to avoid errors from
 		Texture::Unbind(1);

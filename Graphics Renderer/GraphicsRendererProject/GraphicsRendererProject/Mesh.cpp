@@ -31,6 +31,51 @@ void Mesh::UploadMesh(std::vector<Vertex>& vertices)
 	glBindVertexArray(0);
 }
 
+void Mesh::UploadMesh(unsigned int vertexCount, const Vertex* vertices, unsigned int indexCount, unsigned int* indicies)
+{
+	assert(vao == 0);
+
+	//generate buffers
+	glGenBuffers(1, &vbo);
+	glGenVertexArrays(1, &vao);
+
+	//bind vao
+	glBindVertexArray(vao);
+
+	//bind vbo
+	glBindBuffer(GL_ARRAY_BUFFER, vbo);
+
+	//fill vertex buffer
+	glBufferData(GL_ARRAY_BUFFER, vertexCount * sizeof(Vertex), vertices, GL_STATIC_DRAW);
+
+	//enable first element as position
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), 0);
+
+	//bind indicies if there are any
+	if (indexCount != 0)
+	{
+		glGenBuffers(1, &ibo);
+
+		//bind vertex buffer
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
+
+		//fill vertex buffer
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, indexCount * sizeof(unsigned int), indicies, GL_STATIC_DRAW);
+
+		iCount = indexCount / 3;
+	}
+	else
+	{
+		iCount = indexCount / 3;
+	}
+
+	//unbind buffers
+	glBindVertexArray(0);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+}
+
 void Mesh::CreatePyramid()
 {
 	std::vector<Vertex> vertices
@@ -64,9 +109,44 @@ void Mesh::CreatePyramid()
 	UploadMesh(vertices);
 }
 
-void Mesh::InitialiseFromFile(std::string filename)
+void Mesh::InitialiseFromFile(const char* filename)
 {
+	//will read the verticies from the model
+	const aiScene* scene = aiImportFile(filename, 0);
 
+	//just use the first mesh we find for now
+	aiMesh* mesh = scene->mMeshes[0];
+
+	//extract indicies from the first mesh
+	int numFaces = mesh->mNumFaces;
+	std::vector<unsigned int> indicies;
+
+	for (int i = 0; i < numFaces; i++)
+	{
+		indicies.push_back(mesh->mFaces[i].mIndices[0]);
+		indicies.push_back(mesh->mFaces[i].mIndices[2]);
+		indicies.push_back(mesh->mFaces[i].mIndices[1]);
+
+		//generate a second triangle for quads
+		if (mesh->mFaces[i].mNumIndices == 4)
+		{
+			indicies.push_back(mesh->mFaces[i].mIndices[0]);
+			indicies.push_back(mesh->mFaces[i].mIndices[3]);
+			indicies.push_back(mesh->mFaces[i].mIndices[2]);
+		}
+	}
+
+	//extract vertex data
+	int numV = mesh->mNumVertices;
+	Vertex* vertecies = new Vertex[numV];
+	for (int i = 0; i < numV; i++)
+	{
+		vertecies[i].position = vec4(mesh->mVertices[i].x, mesh->mVertices[i].y, mesh->mVertices[i].z, 1);
+		//normals and uv's
+	}
+	UploadMesh(numV, vertecies, indicies.size(), indicies.data());
+
+	delete[] vertecies;
 }
 
 void Mesh::Bind()
