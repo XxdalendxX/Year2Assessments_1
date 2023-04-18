@@ -49,9 +49,8 @@ void Mesh::UploadMesh(unsigned int vertexCount, const Vertex* vertices, unsigned
 	glBufferData(GL_ARRAY_BUFFER, vertexCount * sizeof(Vertex), vertices, GL_STATIC_DRAW);
 
 	//enable first element as position
-	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), 0);
-
+	Vertex::SetUpAttributes();
+	
 	//bind indicies if there are any
 	if (indexCount != 0)
 	{
@@ -63,11 +62,11 @@ void Mesh::UploadMesh(unsigned int vertexCount, const Vertex* vertices, unsigned
 		//fill vertex buffer
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, indexCount * sizeof(unsigned int), indicies, GL_STATIC_DRAW);
 
-		iCount = indexCount / 3;
+		iCount = indexCount;
 	}
 	else
 	{
-		iCount = indexCount / 3;
+		iCount = indexCount;
 	}
 
 	//unbind buffers
@@ -141,7 +140,7 @@ void Mesh::InitialiseFromFile(const char* filename)
 	Vertex* vertecies = new Vertex[numV];
 	for (int i = 0; i < numV; i++)
 	{
-		vertecies[i].position = vec4(mesh->mVertices[i].x, mesh->mVertices[i].y, mesh->mVertices[i].z, 1);
+		vertecies[i].position = vec3(mesh->mVertices[i].x, mesh->mVertices[i].y, mesh->mVertices[i].z);
 		//normals and uv's
 	}
 	UploadMesh(numV, vertecies, indicies.size(), indicies.data());
@@ -156,7 +155,14 @@ void Mesh::Bind()
 
 void Mesh::Render()
 {
-	glDrawArrays(GL_TRIANGLES, 0, vCount);
+	if (vCount <= 0)
+	{
+		glDrawElements(GL_TRIANGLES, iCount, GL_UNSIGNED_INT, 0);
+	}
+	else
+	{
+		glDrawArrays(GL_TRIANGLES, 0, vCount);
+	}
 }
 
 void Mesh::Unbind()

@@ -35,12 +35,14 @@ public:
 
 protected:
 
-	unsigned int vbo; //VertexBufferID
-	unsigned int vao; //VertexArrayID (connective tissue not data)
-	unsigned int ibo; //Index Buffer Object
+	unsigned int vbo = 0; //VertexBufferID
+	unsigned int vao = 0; //VertexArrayID (connective tissue not data)
+	unsigned int ibo = 0; //Index Buffer Object
 
 	int vCount; //Vertex count
 	int iCount; //Index count
+
+	std::vector<unsigned int> indicies; //A storage for the indicies of a mesh to be used during rendering
 
 	bool loadedProperly = false; //Checks if mesh has loaded without problems
 };

@@ -42,12 +42,12 @@ int main(void)
 	Texture texture("unnamed.png");
 	Mesh objectA;
 	Mesh objectB;
-	//objectA.CreatePyramid();
+	objectA.CreatePyramid();
 	objectB.InitialiseFromFile("stanford/bunny.obj");
 
 	glEnable(GL_DEPTH_TEST);
 
-	glClearColor(0.0f, 0.0f, 0, 1);
+	glClearColor(0.5f, 0.5f, 0.0f, 1);
 
 	//Main game loop
 	while (!glfwWindowShouldClose(window))
@@ -60,7 +60,7 @@ int main(void)
 		mat4 rotation = glm::rotate(mat4(1), (float)glfwGetTime(), vec3(0, 1, 0));
 
 		//where the camera is placed and facing
-		mat4 view = glm::lookAt(vec3(1, 1, 1), vec3(0, 0, 0), vec3(0, 1, 0));
+		mat4 view = glm::lookAt(vec3(6, 6, 6), vec3(0, 2, 0), vec3(0, 1, 0));
 
 		float aspect;
 		int width, height;
@@ -68,7 +68,7 @@ int main(void)
 		aspect = width / (float)height;
 
 		//Projection Matrix
-		glm::mat4 projection = glm::perspective(PI / 4, aspect, 1.0f, 100.0f);
+		glm::mat4 projection = glm::perspective(PI / 4, aspect, 1.0f, 1000.0f);
 
 		//Movement vs Perspective Matrix
 		glm::mat4 mvpMatrix = projection * view * rotation;

@@ -1,1 +1,2 @@
-﻿LINK : fatal error LNK1104: cannot open file 'assimp\x64-Debug\assimp-vc143-mtd.lib'
+﻿  EntryPoint.cpp
+  GraphicsRendererProject.vcxproj -> C:\Users\s214266\Documents\Git_Repositories\Year2Assessments_1\Graphics Renderer\GraphicsRendererProject\x64\Debug\GraphicsRendererProject.exe
