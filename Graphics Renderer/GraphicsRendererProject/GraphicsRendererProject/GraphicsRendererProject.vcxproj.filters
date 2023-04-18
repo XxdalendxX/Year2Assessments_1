@@ -13,12 +13,6 @@
     <Filter Include="Graphics Renderer\Tools">
       <UniqueIdentifier>{a06b4bc3-9ac8-46b1-b728-048ba7791f2f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Graphics Renderer\Object Renderer">
-      <UniqueIdentifier>{7d850223-c8e0-4b1e-8d3f-fb55816fb44a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Graphics Renderer\Shader">
-      <UniqueIdentifier>{c0651a0c-7ac2-4ae4-b528-918eb1dfa32c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Graphics Renderer\Tools\Utilities">
       <UniqueIdentifier>{caaa5ca9-d1ec-4411-a645-97d162dfe002}</UniqueIdentifier>
     </Filter>
@@ -31,12 +25,6 @@
     <Filter Include="Graphics Renderer\Tools\Maths">
       <UniqueIdentifier>{ae1ad961-f3f9-48d8-9392-9452def64771}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Graphics Renderer\Object Renderer\Mesh">
-      <UniqueIdentifier>{9f3f1cf9-ef92-495a-9429-29b4ad9b4523}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Graphics Renderer\Object Renderer\Texture">
-      <UniqueIdentifier>{9432f723-f5fe-4732-b001-2df14466210e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Graphics Renderer\Tools\Image">
       <UniqueIdentifier>{64dd7d2b-4e03-433b-9c7e-8efe041b5537}</UniqueIdentifier>
     </Filter>
@@ -46,6 +34,27 @@
     <Filter Include="Graphics Renderer\Tools\Assinp">
       <UniqueIdentifier>{fc031e36-d27b-49b2-9655-bcbd30f93a87}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Graphics Renderer\Objects">
+      <UniqueIdentifier>{7d850223-c8e0-4b1e-8d3f-fb55816fb44a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics Renderer\Objects\Mesh">
+      <UniqueIdentifier>{9f3f1cf9-ef92-495a-9429-29b4ad9b4523}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics Renderer\Objects\Texture">
+      <UniqueIdentifier>{9432f723-f5fe-4732-b001-2df14466210e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics Renderer\Objects\Camera">
+      <UniqueIdentifier>{2b77a941-aaef-4224-8836-1223c4344fbc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics Renderer\Application">
+      <UniqueIdentifier>{0fb1d8db-d13a-480e-abbe-53c2c457b38f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics Renderer\Application\Shader">
+      <UniqueIdentifier>{c0651a0c-7ac2-4ae4-b528-918eb1dfa32c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics Renderer\Application\Application Class">
+      <UniqueIdentifier>{011591a7-70bf-41fc-84b9-799b4fe138d1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="glad.c">
@@ -53,7 +62,7 @@
     </ClCompile>
     <ClCompile Include="EntryPoint.cpp" />
     <ClCompile Include="ShaderProgram.cpp">
-      <Filter>Graphics Renderer\Shader</Filter>
+      <Filter>Graphics Renderer\Application\Shader</Filter>
     </ClCompile>
     <ClCompile Include="Utilities.cpp">
       <Filter>Graphics Renderer\Tools\Utilities</Filter>
@@ -62,11 +71,12 @@
       <Filter>Graphics Renderer\Tools\Vertex</Filter>
     </ClCompile>
     <ClCompile Include="Mesh.cpp">
-      <Filter>Graphics Renderer\Object Renderer\Mesh</Filter>
+      <Filter>Graphics Renderer\Objects\Mesh</Filter>
     </ClCompile>
     <ClCompile Include="Texture.cpp">
-      <Filter>Graphics Renderer\Object Renderer\Texture</Filter>
+      <Filter>Graphics Renderer\Objects\Texture</Filter>
     </ClCompile>
+    <ClCompile Include="Camera.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="glad.h">
@@ -76,7 +86,7 @@
       <Filter>Third Party\GLAD</Filter>
     </ClInclude>
     <ClInclude Include="ShaderProgram.h">
-      <Filter>Graphics Renderer\Shader</Filter>
+      <Filter>Graphics Renderer\Application\Shader</Filter>
     </ClInclude>
     <ClInclude Include="Utilities.h">
       <Filter>Graphics Renderer\Tools\Utilities</Filter>
@@ -91,10 +101,10 @@
       <Filter>Graphics Renderer\Tools\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="Mesh.h">
-      <Filter>Graphics Renderer\Object Renderer\Mesh</Filter>
+      <Filter>Graphics Renderer\Objects\Mesh</Filter>
     </ClInclude>
     <ClInclude Include="Texture.h">
-      <Filter>Graphics Renderer\Object Renderer\Texture</Filter>
+      <Filter>Graphics Renderer\Objects\Texture</Filter>
     </ClInclude>
     <ClInclude Include="Image.h">
       <Filter>Graphics Renderer\Tools\Image</Filter>
@@ -107,6 +117,9 @@
     </ClInclude>
     <ClInclude Include="Assimp.h">
       <Filter>Graphics Renderer\Tools\Assinp</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Graphics Renderer\Objects\Camera</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

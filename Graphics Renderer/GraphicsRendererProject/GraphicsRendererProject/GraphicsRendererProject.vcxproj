@@ -141,6 +141,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="EntryPoint.cpp" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="Mesh.cpp" />
@@ -153,6 +154,7 @@
     <ClInclude Include="Assimp.h" />
     <ClInclude Include="glad.h" />
     <ClInclude Include="Graphics.h" />
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="Image.h" />
     <ClInclude Include="khrplatform.h" />
     <ClInclude Include="Maths.h" />
