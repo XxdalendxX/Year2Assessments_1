@@ -1,1 +1,1 @@
-﻿LINK : fatal error LNK1104: cannot open file 'assimp-vc143-mtd.lib'
+﻿LINK : fatal error LNK1104: cannot open file 'assimp\x64-Debug\assimp-vc143-mtd.lib'

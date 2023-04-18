@@ -43,6 +43,9 @@
     <Filter Include="Graphics Renderer\Tools\Text">
       <UniqueIdentifier>{c10e8d0e-08e4-427c-9b30-b37a1c90ed5c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Graphics Renderer\Tools\Assinp">
+      <UniqueIdentifier>{fc031e36-d27b-49b2-9655-bcbd30f93a87}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="glad.c">
@@ -101,6 +104,9 @@
     </ClInclude>
     <ClInclude Include="Text.h">
       <Filter>Graphics Renderer\Tools\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="Assimp.h">
+      <Filter>Graphics Renderer\Tools\Assinp</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
