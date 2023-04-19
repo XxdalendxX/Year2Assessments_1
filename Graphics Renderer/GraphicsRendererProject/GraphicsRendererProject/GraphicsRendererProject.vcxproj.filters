@@ -76,7 +76,9 @@
     <ClCompile Include="Texture.cpp">
       <Filter>Graphics Renderer\Objects\Texture</Filter>
     </ClCompile>
-    <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Camera.cpp">
+      <Filter>Graphics Renderer\Objects\Camera</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="glad.h">
