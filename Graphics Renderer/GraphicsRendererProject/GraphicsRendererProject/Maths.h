@@ -28,3 +28,5 @@ typedef glm::mat4 mat4;
 
 //the ratio of the circumference of any circle to the diameter of that circle.
 #define PI 3.14159265f
+
+float Clamp(float val, float min, float max); //Limit a value between a maximum and a minimum

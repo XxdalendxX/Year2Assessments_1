@@ -2,7 +2,8 @@
 
 Camera::Camera()
 {
-	m_theta, m_phi = 0;
+	m_theta = 0;
+	m_phi = 0;
 	m_position = { 1,1,1 };
 }
 
@@ -19,54 +20,58 @@ void Camera::Update(float deltaTime, GLFWwindow* window)
 	vec3 forward(cos(phiR) * cos(thetaR), sin(phiR), cos(phiR) * sin(thetaR));
 	vec3 right(-sin(thetaR), 0, cos(thetaR));
 	vec3 up(0, 1, 0);
+	Inputs(deltaTime, window, up, right, forward);
 }
 
 void Camera::Inputs(float deltaTime, GLFWwindow* window, vec3 up, vec3 right, vec3 forward)
 {
+	float rotationSpeed = 100;
 	//move up and down
-	if (glfwGetKey(window, GLFW_KEY_X))
+	if (glfwGetKey(window, GLFW_KEY_SPACE))
 	{
-		m_position += up * deltaTime;
+		m_position += 2.0f * up * deltaTime;
 	}
-	if (glfwGetKey(window, GLFW_KEY_Z))
+	if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT))
 	{
-		m_position -= up * deltaTime;
+		m_position -= 2.0f * up * deltaTime;
 	}
 
 	//move left, right, forward, backwards
 	if (glfwGetKey(window, GLFW_KEY_W))
 	{
-		m_position += forward * deltaTime;
+		m_position += 4.0f * forward * deltaTime;
 	}
 	if (glfwGetKey(window, GLFW_KEY_A))
 	{
-		m_position -= right * deltaTime;
+		m_position -= 4.0f * right * deltaTime;
 	}
 	if (glfwGetKey(window, GLFW_KEY_S))
 	{
-		m_position -= forward * deltaTime;
+		m_position -= 4.0f * forward * deltaTime;
 	}
 	if (glfwGetKey(window, GLFW_KEY_D))
 	{
-		m_position += right * deltaTime;
+		m_position += 4.0f * right * deltaTime;
 	}
 
 	//rotate camera, left, right, up, down
 	if (glfwGetKey(window, GLFW_KEY_LEFT))
 	{
-		m_position += forward * deltaTime;
+		m_theta -= rotationSpeed * deltaTime;
 	}
 	if (glfwGetKey(window, GLFW_KEY_RIGHT))
 	{
-		m_position -= right * deltaTime;
+		m_theta += rotationSpeed * deltaTime;
 	}
 	if (glfwGetKey(window, GLFW_KEY_UP))
 	{
-		m_position -= forward * deltaTime;
+		m_phi += rotationSpeed * deltaTime;
+		m_phi = Clamp(m_phi, -89, 89);
 	}
 	if (glfwGetKey(window, GLFW_KEY_DOWN))
 	{
-		m_position += right * deltaTime;
+		m_phi -= rotationSpeed * deltaTime;
+		m_phi = Clamp(m_phi, -89, 89);
 	}
 }
 

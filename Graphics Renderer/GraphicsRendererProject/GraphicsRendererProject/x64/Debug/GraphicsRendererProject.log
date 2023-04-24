@@ -1,13 +1,3 @@
-﻿  Camera.cpp
-  EntryPoint.cpp
-  Mesh.cpp
-C:\Users\conno\Documents\Year2Assessments_1\Graphics Renderer\GraphicsRendererProject\GraphicsRendererProject\Mesh.cpp(16,26): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\conno\Documents\Year2Assessments_1\Graphics Renderer\GraphicsRendererProject\GraphicsRendererProject\Mesh.cpp(146,62): warning C4267: 'argument': conversion from 'size_t' to 'unsigned int', possible loss of data
-  ShaderProgram.cpp
-  Texture.cpp
-  Utilities.cpp
-  Vertex.cpp
-  Generating Code...
-  glad.c
+﻿  EntryPoint.cpp
 LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
-  GraphicsRendererProject.vcxproj -> C:\Users\conno\Documents\Year2Assessments_1\Graphics Renderer\GraphicsRendererProject\x64\Debug\GraphicsRendererProject.exe
+  GraphicsRendererProject.vcxproj -> C:\Users\s214266\Documents\Git_Repositories\Year2Assessments_1\Graphics Renderer\GraphicsRendererProject\x64\Debug\GraphicsRendererProject.exe

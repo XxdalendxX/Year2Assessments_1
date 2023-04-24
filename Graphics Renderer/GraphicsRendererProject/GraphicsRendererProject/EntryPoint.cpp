@@ -42,7 +42,7 @@ int main(void)
 
 	Camera cam;
 
-	Texture texture("unnamed.png");
+	Texture texture("Obamium.png");
 	Mesh objectA;
 	Mesh objectB;
 	objectA.CreatePyramid();
@@ -52,17 +52,21 @@ int main(void)
 
 	glClearColor(0.5f, 0.5f, 0.0f, 1);
 
+
 	//Main game loop
 	while (!glfwWindowShouldClose(window))
 	{
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		simpleShader.Enable();
+		float delta = 1/60.0f;
 
 		//allows for the rotation of or around the object
 		mat4 rotation = glm::rotate(mat4(1), (float)glfwGetTime(), vec3(0, 1, 0));
 
 		//where the camera is placed and facing
+		
+		cam.Update(delta, window);
 		//mat4 view = glm::lookAt(vec3(6, 6, 6), vec3(0, 2, 0), vec3(0, 1, 0));
 		mat4 view = cam.GetViewMatrix();
 
@@ -87,9 +91,9 @@ int main(void)
 
 		texture.Bind(1);
 
-		objectB.Bind();
-		objectB.Render();
-		objectB.Unbind();
+		objectA.Bind();
+		objectA.Render();
+		objectA.Unbind();
 
 		//done from texture class to avoid errors from
 		Texture::Unbind(1);
@@ -98,6 +102,7 @@ int main(void)
 		glfwSwapBuffers(window);
 		//Tell GLFW to check for current imputs/events.
 		glfwPollEvents();
+
 	}
 
 	//At this point the window should close and clean up of GLFW and exiting goes here

@@ -79,6 +79,9 @@
     <ClCompile Include="Camera.cpp">
       <Filter>Graphics Renderer\Objects\Camera</Filter>
     </ClCompile>
+    <ClCompile Include="Maths.cpp">
+      <Filter>Graphics Renderer\Tools\Maths</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="glad.h">

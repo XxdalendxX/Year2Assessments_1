@@ -28,5 +28,6 @@ public:
 
 	mat4 GetProjectionMatrix(float aspect);
 
-	vec2 mousePos;
+	float r,g,b;
+	
 };
