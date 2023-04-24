@@ -11,14 +11,14 @@ public class Ragdoll : MonoBehaviour
     public bool RagdollOn
     {
         get { return !animator.enabled; }
-        set 
-        { 
+        set
+        {
             animator.enabled = !value;
             foreach (Rigidbody r in rigidbodies)
                 r.isKinematic = !value;
         }
     }
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,6 +33,18 @@ public class Ragdoll : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
+    }
+
+    //[HideInInspector]
+    public bool isCollideing = false;
+    private void OnCollisionEnter(Collision collision)
+    {
+        isCollideing = true;
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        isCollideing = false;
     }
 }

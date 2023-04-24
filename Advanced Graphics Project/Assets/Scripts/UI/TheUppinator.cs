@@ -17,8 +17,10 @@ public class TheUppinator : MonoBehaviour
         Debug.Log("uppsies");
 
         StartCoroutine(Daisies(body));
+        
     }
 
+    [SerializeField, Range(0, 1000)] float push = 100;
     private IEnumerator Daisies(Transform body)
     {
         yield return new WaitForSeconds(3f);
@@ -31,6 +33,19 @@ public class TheUppinator : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
 
+        StartCoroutine(Downsies(body));
+
+        yield return null;
+    }
+
+    private IEnumerator Downsies(Transform body)
+    {
+        yield return new WaitForSeconds(10f);
+
+        body.Translate(new Vector3(0, -height, 0));
+
+        ragdoll.RagdollOn = false;
+       
         yield return null;
     }
 }
