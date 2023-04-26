@@ -50,7 +50,7 @@ void Mesh::UploadMesh(unsigned int vertexCount, const Vertex* vertices, unsigned
 
 	//enable first element as position
 	Vertex::SetUpAttributes();
-	
+
 	//bind indicies if there are any
 	if (indexCount != 0)
 	{
@@ -75,35 +75,36 @@ void Mesh::UploadMesh(unsigned int vertexCount, const Vertex* vertices, unsigned
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
+
 void Mesh::CreatePyramid()
 {
 	std::vector<Vertex> vertices
 	{
 	//	position			colour			normal		uv
 	//south
-		{{-0.5, 0, -0.5},	{0.5, 0.25, 0},	{0, 1, -1},	{0, 0 }},
-		{{0, 1, 0      },	{0.5, 0.25, 0},	{0, 1, -1},	{0.5,1}},
-		{{0.5, 0, -0.5 },	{0.5, 0.25, 0},	{0, 1, -1},	{1, 0 }},
+		{{-15, 0, -15},{0.5, 0.25, 0},	{0, 1, -1},	{0, 0 }},
+		{{-10, 10, -10},{0.5, 0.25, 0},	{0, 1, -1},	{0.5,1}},
+		{{-5, 0, -15 },{0.5, 0.25, 0},	{0, 1, -1},	{1, 0 }},
 	//north
-		{{0.5, 0, 0.5 },	{0.5, 0.25, 0},	{0, 1, 1},	{0, 0 }},
-		{{0, 1, 0     },	{0.5, 0.25, 0},	{0, 1, 1},	{0.5,1}},
-		{{-0.5, 0, 0.5},	{0.5, 0.25, 0},	{0, 1, 1},	{1, 0 }},
+		{{-5, 0, -5 },{0.5, 0.25, 0},	{0, 1, 1},	{0, 0 }},
+		{{-10, 10, -10},{0.5, 0.25, 0},	{0, 1, 1},	{0.5,1}},
+		{{-15, 0, -5},{0.5, 0.25, 0},	{0, 1, 1},	{1, 0 }},
 
 	//base
-		{{-0.5, 0, -0.5},	{0.5, 0.25, 0},	{0, -1, 0},	{0, 0 }},
-		{{-0.5, 0, 0.5 },	{0.5, 0.25, 0},	{0, -1, 0},	{0, 1 }},
-		{{0.5, 0, -0.5 },	{0.5, 0.25, 0},	{0, -1, 0},	{1, 0 }},
-		{{-0.5, 0, 0.5 },	{0.5, 0.25, 0},	{0, -1, 0},	{0, 1 }},
-		{{0.5, 0, -0.5 },	{0.5, 0.25, 0},	{0, -1, 0},	{1, 0 }},
-		{{0.5, 0, 0.5  },	{0.5, 0.25, 0},	{0, -1, 0},	{1, 1 }},
+		{{-15, 0, -15},{0.5, 0.25, 0},	{0, -1, 0},	{0, 0 }},
+		{{-15, 0, -5 },{0.5, 0.25, 0},	{0, -1, 0},	{0, 1 }},
+		{{-5, 0, -15 },{0.5, 0.25, 0},	{0, -1, 0},	{1, 0 }},
+		{{-15, 0, -5 },{0.5, 0.25, 0},	{0, -1, 0},	{0, 1 }},
+		{{-5, 0, -15 },{0.5, 0.25, 0},	{0, -1, 0},	{1, 0 }},
+		{{-5, 0, -5  },{0.5, 0.25, 0},	{0, -1, 0},	{1, 1 }},
 	//west
-		{{-0.5, 0, 0.5 },	{0.5, 0.30, 0},	{-1, 1, 0},	{0, 0 }},
-		{{0, 1, 0      },	{0.5, 0.30, 0},	{-1, 1, 0},	{0.5,1}},
-		{{-0.5, 0, -0.5},	{0.5, 0.30, 0},	{-1, 1, 0},	{1, 0 }},
+		{{-15, 0, -5 },{0.5, 0.30, 0},	{-1, 1, 0},	{0, 0 }},
+		{{-10, 10, -10},{0.5, 0.30, 0},	{-1, 1, 0},	{0.5,1}},
+		{{-15, 0, -15},{0.5, 0.30, 0},	{-1, 1, 0},	{1, 0 }},
 	//east
-		{{0.5, 0, -0.5},	{0.5, 0.30, 0},	{1, 1, 0},	{0, 0 }},
-		{{0, 1, 0     },	{0.5, 0.30, 0},	{1, 1, 0},	{0.5,1}},
-		{{0.5, 0, 0.5},		{0.5, 0.30, 0},	{1, 1, 0},	{1, 0 }},
+		{{-5, 0, -15},{0.5, 0.30, 0},	{1, 1, 0},	{0, 0 }},
+		{{-10, 10, -10},{0.5, 0.30, 0},	{1, 1, 0},	{0.5,1}},
+		{{-5, 0, -5 },{0.5, 0.30, 0},	{1, 1, 0},	{1, 0 }},
 	};
 	UploadMesh(vertices);
 }
@@ -141,12 +142,46 @@ void Mesh::InitialiseFromFile(const char* filename)
 	for (int i = 0; i < numV; i++)
 	{
 		vertecies[i].position = vec3(mesh->mVertices[i].x, mesh->mVertices[i].y, mesh->mVertices[i].z);
-		//normals and uv's
+		vertecies[i].normal = vec3(mesh->mNormals[i].x, mesh->mNormals[i].y, mesh->mNormals[i].z);
+		//uv's
 	}
 	UploadMesh(numV, vertecies, indicies.size(), indicies.data());
 
 	delete[] vertecies;
 }
+
+
+void Mesh::LoadMaterial(const char* filename)
+{
+	std::fstream file(filename, std::ios::in);
+	std::string line;
+	std::string header;
+	char buffer[256];
+	while (!file.eof())
+	{
+		file.getline(buffer, 256);
+		line = buffer;
+		std::stringstream ss(line, std::stringstream::in | std::stringstream::out);
+
+		if (line.find("Ka") == 0)
+			ss >> header >> Ka.x >> Ka.y >> Ka.z;
+		else if (line.find("Kd") == 0)
+			ss >> header >> Kd.x >> Kd.y >> Kd.z;
+		else if (line.find("Ks") == 0)
+			ss >> header >> Ks.x >> Ks.y >> Ks.z;
+		else if (line.find("Ns") == 0)
+			ss >> header >> specularPower;
+	}
+}
+
+void Mesh::ApplyMaterial(ShaderProgram* shader)
+{
+	shader->SetVectorUniform("Ka", Ka);
+	shader->SetVectorUniform("Kd", Kd);
+	shader->SetVectorUniform("Ks", Ks);
+	shader->SetFloatUniform("specularPower", specularPower);
+}
+
 
 void Mesh::Bind()
 {

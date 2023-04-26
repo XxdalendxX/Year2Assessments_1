@@ -1,6 +1,7 @@
 #pragma once
 #include "Maths.h"
 #include "Graphics.h"
+#include "ShaderProgram.h"
 #include "Vertex.h"
 #include "Text.h"
 
@@ -22,9 +23,11 @@ public:
 	
 	//Generates and binds the vbo and the vao
 	void UploadMesh(std::vector<Vertex>& vertices);
-
 	//Generates and binds the vbo and the vao
 	void UploadMesh(unsigned int vertexCount, const Vertex* vertecies, unsigned int indexCount = 0, unsigned int* indicies = nullptr);
+
+	void LoadMaterial(const char* filename);
+	void ApplyMaterial(ShaderProgram* shader);
 
 	//Binds vao
 	void Bind();
@@ -38,6 +41,11 @@ protected:
 	unsigned int vbo = 0; //VertexBufferID
 	unsigned int vao = 0; //VertexArrayID (connective tissue not data)
 	unsigned int ibo = 0; //Index Buffer Object
+
+	vec3 Ka; //Ambient material colour
+	vec3 Kd; //Diffuse material colour
+	vec3 Ks; //Specular material colour
+	float specularPower; //Material specular power
 
 	int vCount; //Vertex count
 	int iCount; //Index count

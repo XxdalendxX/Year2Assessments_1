@@ -2,9 +2,9 @@
 
 Camera::Camera()
 {
-	m_theta = 0;
-	m_phi = 0;
-	m_position = { 1,1,1 };
+	m_theta = 220;
+	m_phi = -20;
+	m_position = { 4,4,4};
 }
 
 Camera::~Camera()
@@ -29,29 +29,29 @@ void Camera::Inputs(float deltaTime, GLFWwindow* window, vec3 up, vec3 right, ve
 	//move up and down
 	if (glfwGetKey(window, GLFW_KEY_SPACE))
 	{
-		m_position += 2.0f * up * deltaTime;
+		m_position += 5.0f * up * deltaTime;
 	}
 	if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT))
 	{
-		m_position -= 2.0f * up * deltaTime;
+		m_position -= 5.0f * up * deltaTime;
 	}
 
 	//move left, right, forward, backwards
 	if (glfwGetKey(window, GLFW_KEY_W))
 	{
-		m_position += 4.0f * forward * deltaTime;
+		m_position += 10.0f * forward * deltaTime;
 	}
 	if (glfwGetKey(window, GLFW_KEY_A))
 	{
-		m_position -= 4.0f * right * deltaTime;
+		m_position -= 10.0f * right * deltaTime;
 	}
 	if (glfwGetKey(window, GLFW_KEY_S))
 	{
-		m_position -= 4.0f * forward * deltaTime;
+		m_position -= 10.0f * forward * deltaTime;
 	}
 	if (glfwGetKey(window, GLFW_KEY_D))
 	{
-		m_position += 4.0f * right * deltaTime;
+		m_position += 10.0f * right * deltaTime;
 	}
 
 	//rotate camera, left, right, up, down

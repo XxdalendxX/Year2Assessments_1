@@ -55,6 +55,12 @@
     <Filter Include="Graphics Renderer\Application\Application Class">
       <UniqueIdentifier>{011591a7-70bf-41fc-84b9-799b4fe138d1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Graphics Renderer\Tools\Light">
+      <UniqueIdentifier>{c16187c4-2bbd-4ea7-b978-12e58cafd26b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics Renderer\Tools\Time">
+      <UniqueIdentifier>{076061a0-d2e2-4fa5-bfc5-ae3dbf17b8f1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="glad.c">
@@ -125,6 +131,12 @@
     </ClInclude>
     <ClInclude Include="Camera.h">
       <Filter>Graphics Renderer\Objects\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Light.h">
+      <Filter>Graphics Renderer\Tools\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="Time.h">
+      <Filter>Graphics Renderer\Tools\Time</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
