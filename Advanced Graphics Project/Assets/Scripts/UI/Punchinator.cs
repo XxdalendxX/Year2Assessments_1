@@ -26,10 +26,10 @@ public class Punchinator : MonoBehaviour
 
     private IEnumerator Daisies()
     {
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.35f);
 
         ragdoll.RagdollOn = true;
-        rBody.AddForce(-10000, 0, 0);
+        rBody.AddForce(-10000, 10000, 0);
 
         StartCoroutine(Downsies(tBody));
 
@@ -38,11 +38,11 @@ public class Punchinator : MonoBehaviour
 
     private IEnumerator Downsies(Transform body)
     {
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(2f);
 
         ragdoll.RagdollOn = false;
-        tBody.Rotate(new Vector3(0,90,0 ), Space.World);
-        tBody.Translate(0, 1, 0);
+        tBody.SetPositionAndRotation(new Vector3(0,0,0), new Quaternion(0, 180, 0, 1));
+        tBody.Rotate(new Vector3(0, -90, 0), Space.World);
         animator.Play("Idle");
 
         yield return null;

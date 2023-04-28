@@ -42,7 +42,7 @@ public class TheUppinator : MonoBehaviour
     {
         yield return new WaitForSeconds(10f);
 
-        body.Translate(new Vector3(0, -height, 0));
+        body.Translate(new Vector3(0, -(height), 0));
 
         ragdoll.RagdollOn = false;
        

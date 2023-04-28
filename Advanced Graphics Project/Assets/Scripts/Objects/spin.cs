@@ -27,11 +27,11 @@ public class spin : MonoBehaviour
 
     void clockwise()
     {
-        this.transform.Rotate(0, 0.1f, 0);
+        this.transform.Rotate(0, 0.25f, 0);
     }
 
     void anticlockwise()
     {
-        this.transform.Rotate(0, -0.1f, 0);
+        this.transform.Rotate(0, -0.25f, 0);
     }
 }
