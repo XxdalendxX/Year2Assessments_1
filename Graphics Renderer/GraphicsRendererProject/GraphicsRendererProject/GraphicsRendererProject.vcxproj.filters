@@ -61,6 +61,12 @@
     <Filter Include="Graphics Renderer\Tools\Time">
       <UniqueIdentifier>{076061a0-d2e2-4fa5-bfc5-ae3dbf17b8f1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Third Party\ImGui">
+      <UniqueIdentifier>{7039c22d-5e1f-4af1-ac1c-6be2723364aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics Renderer\Tools\ImGui">
+      <UniqueIdentifier>{25f0d357-ac6c-4315-9520-f985eaee26f1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="glad.c">
@@ -87,6 +93,27 @@
     </ClCompile>
     <ClCompile Include="Maths.cpp">
       <Filter>Graphics Renderer\Tools\Maths</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ImGUI\imgui.cpp">
+      <Filter>Third Party\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ImGUI\imgui_demo.cpp">
+      <Filter>Third Party\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ImGUI\imgui_draw.cpp">
+      <Filter>Third Party\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ImGUI\imgui_impl_glfw.cpp">
+      <Filter>Third Party\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ImGUI\imgui_impl_opengl3.cpp">
+      <Filter>Third Party\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ImGUI\imgui_tables.cpp">
+      <Filter>Third Party\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ImGUI\imgui_widgets.cpp">
+      <Filter>Third Party\ImGui</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -137,6 +164,9 @@
     </ClInclude>
     <ClInclude Include="Time.h">
       <Filter>Graphics Renderer\Tools\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui_Class.h">
+      <Filter>Graphics Renderer\Tools\ImGui</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

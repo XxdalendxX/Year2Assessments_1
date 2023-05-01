@@ -28,6 +28,8 @@ public:
 
 	mat4 GetProjectionMatrix(float aspect);
 
+	vec3 GetPos();
+
 	float r,g,b;
 	
 };

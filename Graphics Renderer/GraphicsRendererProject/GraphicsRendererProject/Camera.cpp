@@ -88,3 +88,8 @@ mat4 Camera::GetProjectionMatrix(float aspect)
 {
 	return glm::perspective(PI / 4, aspect, 0.1f, 1000.0f);
 }
+
+vec3 Camera::GetPos()
+{
+	return m_position;
+}

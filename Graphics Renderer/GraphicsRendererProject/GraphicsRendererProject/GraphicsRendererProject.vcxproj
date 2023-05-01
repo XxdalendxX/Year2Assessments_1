@@ -141,6 +141,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\ImGUI\imgui.cpp" />
+    <ClCompile Include="..\ImGUI\imgui_demo.cpp" />
+    <ClCompile Include="..\ImGUI\imgui_draw.cpp" />
+    <ClCompile Include="..\ImGUI\imgui_impl_glfw.cpp" />
+    <ClCompile Include="..\ImGUI\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="..\ImGUI\imgui_tables.cpp" />
+    <ClCompile Include="..\ImGUI\imgui_widgets.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="EntryPoint.cpp" />
     <ClCompile Include="glad.c" />
@@ -157,6 +164,7 @@
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Image.h" />
+    <ClInclude Include="ImGui_Class.h" />
     <ClInclude Include="khrplatform.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="Maths.h" />

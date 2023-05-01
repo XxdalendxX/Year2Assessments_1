@@ -11,6 +11,7 @@ uniform vec3 cameraPos;
 
 uniform vec3 lightDirection;
 uniform vec3 lightColour;
+
 uniform vec3 ambientColour;
 
 uniform vec3 Ka;
@@ -28,19 +29,19 @@ void main()
 	
 	//Calculate lambert term (negate light direction)
 	float lambertTerm = max(0, min(1, dot(N, -L)));
-
+	
 	//Calculate view vector and reflection vector
 	vec3 V = normalize(cameraPos - _Position.xyz);
 	vec3 R = reflect(L, N);
-
+	
 	//Calculate specular term
 	float specularTerm = pow( max(0, dot(R, V)), specularPower);
-
+	
 	//Calculate each colour property
 	vec3 ambient = ambientColour * Ka;
 	vec3 diffuse = lightColour * Kd * lambertTerm;
 	vec3 specular = lightColour * Ks * specularTerm;
-
+	
 	FragColour = vec4(diffuse + ambient + specular, 1.0);
 	
 }
