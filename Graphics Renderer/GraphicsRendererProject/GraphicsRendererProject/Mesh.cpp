@@ -80,31 +80,31 @@ void Mesh::CreatePyramid()
 {
 	std::vector<Vertex> vertices
 	{
-	//	position			colour			normal		uv
+	//	position		normal		UV		colour
 	//south
-		{{-15, 0, -15},{0.5, 0.25, 0},	{0, 1, -1},	{0, 0 }},
-		{{-10, 10, -10},{0.5, 0.25, 0},	{0, 1, -1},	{0.5,1}},
-		{{-5, 0, -15 },{0.5, 0.25, 0},	{0, 1, -1},	{1, 0 }},
+		{{-15, 0, -15},	{0, 1, -1},	{0, 0 },{0.5, 0.25, 0}},
+		{{-10, 10, -10},{0, 1, -1},	{0.5,1},{0.5, 0.25, 0}},
+		{{-5, 0, -15 },	{0, 1, -1},	{1, 0 },{0.5, 0.25, 0}},
 	//north
-		{{-5, 0, -5 },{0.5, 0.25, 0},	{0, 1, 1},	{0, 0 }},
-		{{-10, 10, -10},{0.5, 0.25, 0},	{0, 1, 1},	{0.5,1}},
-		{{-15, 0, -5},{0.5, 0.25, 0},	{0, 1, 1},	{1, 0 }},
+		{{-5, 0, -5 },	{0, 1, 1},	{0, 0 },{0.5, 0.25, 0}},
+		{{-10, 10, -10},{0, 1, 1},	{0.5,1},{0.5, 0.25, 0}},
+		{{-15, 0, -5},	{0, 1, 1},	{1, 0 },{0.5, 0.25, 0}},
 
 	//base
-		{{-15, 0, -15},{0.5, 0.25, 0},	{0, -1, 0},	{0, 0 }},
-		{{-15, 0, -5 },{0.5, 0.25, 0},	{0, -1, 0},	{0, 1 }},
-		{{-5, 0, -15 },{0.5, 0.25, 0},	{0, -1, 0},	{1, 0 }},
-		{{-15, 0, -5 },{0.5, 0.25, 0},	{0, -1, 0},	{0, 1 }},
-		{{-5, 0, -15 },{0.5, 0.25, 0},	{0, -1, 0},	{1, 0 }},
-		{{-5, 0, -5  },{0.5, 0.25, 0},	{0, -1, 0},	{1, 1 }},
+		{{-15, 0, -15},	{0, -1, 0},	{0, 0 },{0.5, 0.25, 0}},
+		{{-15, 0, -5 },	{0, -1, 0},	{0, 1 },{0.5, 0.25, 0}},
+		{{-5, 0, -15 },	{0, -1, 0},	{1, 0 },{0.5, 0.25, 0}},
+		{{-15, 0, -5 },	{0, -1, 0},	{0, 1 },{0.5, 0.25, 0}},
+		{{-5, 0, -15 },	{0, -1, 0},	{1, 0 },{0.5, 0.25, 0}},
+		{{-5, 0, -5  },	{0, -1, 0},	{1, 1 },{0.5, 0.25, 0}},
 	//west
-		{{-15, 0, -5 },{0.5, 0.30, 0},	{-1, 1, 0},	{0, 0 }},
-		{{-10, 10, -10},{0.5, 0.30, 0},	{-1, 1, 0},	{0.5,1}},
-		{{-15, 0, -15},{0.5, 0.30, 0},	{-1, 1, 0},	{1, 0 }},
+		{{-15, 0, -5 },	{-1, 1, 0},	{0, 0 },{0.5, 0.30, 0}},
+		{{-10, 10, -10},{-1, 1, 0},	{0.5,1},{0.5, 0.30, 0}},
+		{{-15, 0, -15},	{-1, 1, 0},	{1, 0 },{0.5, 0.30, 0}},
 	//east
-		{{-5, 0, -15},{0.5, 0.30, 0},	{1, 1, 0},	{0, 0 }},
-		{{-10, 10, -10},{0.5, 0.30, 0},	{1, 1, 0},	{0.5,1}},
-		{{-5, 0, -5 },{0.5, 0.30, 0},	{1, 1, 0},	{1, 0 }},
+		{{-5, 0, -15},	{1, 1, 0},	{0, 0 },{0.5, 0.30, 0}},
+		{{-10, 10, -10},{1, 1, 0},	{0.5,1},{0.5, 0.30, 0}},
+		{{-5, 0, -5 },	{1, 1, 0},	{1, 0 },{0.5, 0.30, 0}},
 	};
 	UploadMesh(vertices);
 }
@@ -143,7 +143,10 @@ void Mesh::InitialiseFromFile(const char* filename)
 	{
 		vertecies[i].position = vec3(mesh->mVertices[i].x, mesh->mVertices[i].y, mesh->mVertices[i].z);
 		vertecies[i].normal = vec3(mesh->mNormals[i].x, mesh->mNormals[i].y, mesh->mNormals[i].z);
-		//uv's
+		if (mesh->mTextureCoords[0])
+			vertecies[i].uv = vec2(mesh->mTextureCoords[0][i].x, -mesh->mTextureCoords[0][i].y);
+		else
+			vertecies[i].uv = vec2(0);
 	}
 	UploadMesh(numV, vertecies, indicies.size(), indicies.data());
 
@@ -157,6 +160,12 @@ void Mesh::LoadMaterial(const char* filename)
 	std::string line;
 	std::string header;
 	char buffer[256];
+
+	std::string directory(filename);
+	int index = directory.rfind('/');
+	if (index != -1)
+		directory = directory.substr(0, index + 1);
+
 	while (!file.eof())
 	{
 		file.getline(buffer, 256);
@@ -171,6 +180,18 @@ void Mesh::LoadMaterial(const char* filename)
 			ss >> header >> Ks.x >> Ks.y >> Ks.z;
 		else if (line.find("Ns") == 0)
 			ss >> header >> specularPower;
+		else if (line.find("map_Kd") == 0)
+		{
+			std::string mapFileName;
+			ss >> header >> mapFileName;
+			mapKd.SetDirectory((directory + mapFileName));
+			mapKd.LoadFromFile(mapKd.GetDirectory());
+			if (mapKd.CheckStatus())
+				std::cout << "Texture has loaded properly" << std::endl;
+			else
+				std::cout << "Texture has not loaded properly" << std::endl;
+			mapKd.ReadDirectory();
+		}
 	}
 }
 
@@ -180,6 +201,9 @@ void Mesh::ApplyMaterial(ShaderProgram* shader)
 	shader->SetVectorUniform("Kd", Kd);
 	shader->SetVectorUniform("Ks", Ks);
 	shader->SetFloatUniform("specularPower", specularPower);
+
+	mapKd.Bind(0);
+	shader->SetIntergerUniform("textureSampler", 0);
 }
 
 

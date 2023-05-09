@@ -56,17 +56,19 @@ int main(void)
 	Light light2;
 	vec3 ambientLight;
 
-	Texture texture("Obamium.png");
+	Texture texture1("Obamium.png");
+
 	Mesh objectA;
 	Mesh objectB;
 	objectA.CreatePyramid();
-	objectB.InitialiseFromFile("stanford/bunny.obj");
-	objectB.LoadMaterial("stanford/bunny.mtl");
+	objectB.InitialiseFromFile("soulspear/soulspear.obj");
+	objectB.LoadMaterial("soulspear/soulspear.mtl");
 
 	light1.direction = glm::normalize(vec3(0, 1, 1));
 	light1.colour = { 1,1,1 };
 	
 	light2.colour = { 1,1,1 };
+
 	ambientLight = { 0.25f, 0.25f, 0.25f };
 
 	glEnable(GL_DEPTH_TEST);
@@ -118,25 +120,24 @@ int main(void)
 		phongShader.SetMatrixUniform("mvpMatrix", mvpMatrix);
 		phongShader.SetMatrixUniform("mMatrix", rotation);		//mMatrix = model matrix
 		phongShader.SetVectorUniform("cameraPos", cam.GetPos());
-		phongShader.SetVectorUniform("lightDirection", light2.direction);
-		phongShader.SetVectorUniform("lightColour", light2.colour);
-		phongShader.SetVectorUniform("lightDirection", light1.direction);
-		phongShader.SetVectorUniform("lightColour", light1.colour);
+		phongShader.SetVectorUniform("lightDirection2", light2.direction);
+		phongShader.SetVectorUniform("lightColour2", light2.colour);
+		phongShader.SetVectorUniform("lightDirection1", light1.direction);
+		phongShader.SetVectorUniform("lightColour1", light1.colour);
 		phongShader.SetVectorUniform("ambientLight", ambientLight);
 
-		//Set the texture sampler uniform to the value corresponding to the active texture,
-		//NOT the texture ID.
-		objectB.ApplyMaterial(&phongShader);
-		//objectA.ApplyMaterial(&phongShader);
-		phongShader.SetIntergerUniform("textureSampler", 1);
+		/*Set the texture sampler uniform to the value corresponding
+		to the active texture NOT the texture ID.*/
+		phongShader.SetIntergerUniform("textureSampler", 0);
 
-		texture.Bind(1);
-
+		texture1.Bind(0);
 		ObjectRender(objectA);
-		ObjectRender(objectB);
+		//done from texture class to avoid errors
+		Texture::Unbind(0);
 
-		//done from texture class to avoid errors from
-		Texture::Unbind(1);
+		objectB.ApplyMaterial(&phongShader);
+		ObjectRender(objectB);
+		Texture::Unbind(0);
 
 		//renders ImGui objects frame
 		UIRender();

@@ -4,6 +4,7 @@
 #include "ShaderProgram.h"
 #include "Vertex.h"
 #include "Text.h"
+#include "Texture.h"
 
 class Mesh
 {
@@ -46,6 +47,8 @@ protected:
 	vec3 Kd; //Diffuse material colour
 	vec3 Ks; //Specular material colour
 	float specularPower; //Material specular power
+
+	Texture mapKd; // diffuse texture map
 
 	int vCount; //Vertex count
 	int iCount; //Index count
