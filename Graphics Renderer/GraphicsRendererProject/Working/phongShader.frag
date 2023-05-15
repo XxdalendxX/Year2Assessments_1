@@ -92,6 +92,6 @@ vec3 getDiffuse(vec3 direction, vec3 colour, vec3 normal)
 vec3 getSpecular (vec3 direction, vec3 colour, vec3 normal, vec3 view)
 {
 	vec3 R = reflect(direction, normal);
-	float specularTerm = pow(max(0, dot(R, view)), specularPower);
+	float specularTerm = pow(max(0, min(0, dot(R, view))), specularPower);
 	return specularTerm * colour;
 }

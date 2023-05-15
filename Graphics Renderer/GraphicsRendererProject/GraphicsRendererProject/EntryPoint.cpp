@@ -12,9 +12,10 @@
 #include "Time.h"
 
 SceneLights m_Lights;
+std::vector<Light> lightSources;
 
 void ObjectRender(Mesh& object);
-void Draw(ShaderProgram* shader);
+void Draw(ShaderProgram* shader, std::vector<Light> lightSources);
 
 GLFWwindow* window;
 int main(void)
@@ -60,9 +61,6 @@ int main(void)
 	Light pointLight;
 	vec3 ambientLight;
 
-	m_Lights.pointLights.push_back(sunLight);
-	m_Lights.pointLights.push_back(pointLight);
-
 	Texture texture1("Obamium.png");
 
 	Mesh objectA;
@@ -72,10 +70,15 @@ int main(void)
 	objectB.LoadMaterial("soulspear/soulspear.mtl");
 
 	sunLight.direction = glm::normalize(vec3(-1, -1, -1));
-	sunLight.colour = { 0,1,0 };
+	sunLight.colour = { 1,1,1 };
 	pointLight.direction = glm::normalize(vec3(1, 1, 1));
-	pointLight.colour = { 1,0,1 };
+	pointLight.colour = { 1,1,1 };
 
+	lightSources.push_back(sunLight);
+	lightSources.push_back(pointLight);
+	m_Lights.pointLights.push_back(sunLight);
+	m_Lights.pointLights.push_back(pointLight);
+	
 	ambientLight = { 0.25f, 0.25f, 0.25f };
 
 	glEnable(GL_DEPTH_TEST);
@@ -102,6 +105,11 @@ int main(void)
 		ImGui::DragFloat3("Point light Direction", &pointLight.direction[0], 1.0f, 1.0f, 1.0f);
 		ImGui::DragFloat3("Point light Colour", &pointLight.colour[0], pointLight.colour.x, pointLight.colour.y, pointLight.colour.z);
 		ImGui::End();
+
+		lightSources[0].direction = sunLight.direction;
+		lightSources[0].colour = sunLight.colour;
+		lightSources[1].direction = pointLight.direction;
+		lightSources[1].colour = pointLight.colour;
 
 		//allows for the rotation of or around the object
 		mat4 rotation = glm::rotate(mat4(1), 1.0f, vec3(0, 1, 0));
@@ -130,7 +138,7 @@ int main(void)
 		phongShader.SetVectorUniform("cameraPos", cam.GetPos());
 		phongShader.SetVectorUniform("ambientLight", ambientLight);
 
-		Draw(&phongShader);
+		Draw(&phongShader, lightSources);
 
 		/*Set the texture sampler uniform to the value corresponding
 		to the active texture NOT the texture ID.*/
@@ -169,14 +177,15 @@ void ObjectRender(Mesh& object)
 	object.Unbind();
 }
 
-void Draw(ShaderProgram* shader)
+void Draw(ShaderProgram* shader, std::vector<Light> lightSources)
 {
-	for (int i = 0; i < MAX_LIGHTS && i < m_Lights.pointLights.size(); i++)
+	
+	for (int i = 0; i < MAX_LIGHTS && i < lightSources.size(); i++)
 	{
-		m_Lights.pointLightPositions[i] = m_Lights.pointLights[i].direction;
-		m_Lights.pointLightColours[i] = m_Lights.pointLights[i].colour;
+		m_Lights.pointLightPositions[i] = lightSources[i].direction;
+		m_Lights.pointLightColours[i] = lightSources[i].colour;
 	}
-
+	
 	int numLights = m_Lights.GetNumLights();
 	shader->SetIntergerUniform("numLights", numLights);
 	shader->SetVectorUniform("PointLightPosition", numLights, m_Lights.GetPointLightPositions());
