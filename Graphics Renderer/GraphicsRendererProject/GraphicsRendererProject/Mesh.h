@@ -30,6 +30,8 @@ public:
 	void LoadMaterial(const char* filename);
 	void ApplyMaterial(ShaderProgram* shader);
 
+	void CalculateTangents(Vertex* vertices, unsigned int vertexCount, const std::vector<unsigned int>& indices);
+
 	//Binds vao
 	void Bind();
 	//Renders mesh
@@ -49,6 +51,8 @@ protected:
 	float specularPower; //Material specular power
 
 	Texture mapKd; // diffuse texture map
+	Texture mapKs; // specular texture map
+	Texture mapBump; // normal map
 
 	int vCount; //Vertex count
 	int iCount; //Index count

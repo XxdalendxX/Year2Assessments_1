@@ -8,6 +8,7 @@ struct Vertex
 	vec3 normal; //Normal of the vertex
 	vec2 uv; //Texture coordinates with range of [0,1] and [u,v]
 	vec3 colour; //RGB of the vertex (will blend between other vertices)
+	vec4 tangent; //Tangent of the vertex
 
 	//Enables vertex attribute arrays and set vertex attribute pointers for the 4 variables
 	static void SetUpAttributes();
