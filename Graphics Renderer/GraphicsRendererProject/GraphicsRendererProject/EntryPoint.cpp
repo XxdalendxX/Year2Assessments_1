@@ -5,12 +5,16 @@
 #include "ShaderProgram.h"
 #include "Camera.h"
 #include "Light.h"
+#include "SceneLights.h"
 #include "Mesh.h"
 #include "Texture.h"
 #include "Text.h"
 #include "Time.h"
 
+SceneLights m_Lights;
+
 void ObjectRender(Mesh& object);
+void Draw(ShaderProgram* shader);
 
 GLFWwindow* window;
 int main(void)
@@ -52,9 +56,12 @@ int main(void)
 
 	Camera cam;
 
-	Light light1;
-	Light light2;
+	Light sunLight;
+	Light pointLight;
 	vec3 ambientLight;
+
+	m_Lights.pointLights.push_back(sunLight);
+	m_Lights.pointLights.push_back(pointLight);
 
 	Texture texture1("Obamium.png");
 
@@ -64,10 +71,10 @@ int main(void)
 	objectB.InitialiseFromFile("soulspear/soulspear.obj");
 	objectB.LoadMaterial("soulspear/soulspear.mtl");
 
-	light1.direction = glm::normalize(vec3(0, 1, 1));
-	light1.colour = { 1,1,1 };
-	
-	light2.colour = { 1,1,1 };
+	sunLight.direction = glm::normalize(vec3(-1, -1, -1));
+	sunLight.colour = { 0,1,0 };
+	pointLight.direction = glm::normalize(vec3(1, 1, 1));
+	pointLight.colour = { 1,0,1 };
 
 	ambientLight = { 0.25f, 0.25f, 0.25f };
 
@@ -83,18 +90,17 @@ int main(void)
 		//creates new ImGui frame
 		UINewFrame();
 
-		
-
 		phongShader.Enable();
 
 		float time = glfwGetTime(); //gets time since application start
-		light2.direction = glm::normalize(vec3(glm::cos(time * 2), 0, glm::sin(time * 2)));
+		pointLight.direction = glm::normalize(vec3(glm::cos(time * 2), 0, glm::sin(time * 2)));
 
 		//ImGui Menu within application
 		ImGui::Begin("Light Settings");
-		ImGui::DragFloat3("Sunlight Direction", &light1.direction[0], 0.1f, -1.0f, 1.0f);
-		ImGui::DragFloat3("Sunlight Colour", &light1.colour[0], light1.colour.x, light1.colour.y, light1.colour.z);
-		ImGui::DragFloat3("Point Light Colour", &light2.colour[0], light1.colour.x, light1.colour.y, light1.colour.z);
+		ImGui::DragFloat3("Sunlight Direction", &sunLight.direction[0], -1.0f, -1.0f, -1.0f);
+		ImGui::DragFloat3("Sunlight Colour", &sunLight.colour[0], sunLight.colour.x, sunLight.colour.y, sunLight.colour.z);
+		ImGui::DragFloat3("Point light Direction", &pointLight.direction[0], 1.0f, 1.0f, 1.0f);
+		ImGui::DragFloat3("Point light Colour", &pointLight.colour[0], pointLight.colour.x, pointLight.colour.y, pointLight.colour.z);
 		ImGui::End();
 
 		//allows for the rotation of or around the object
@@ -117,14 +123,14 @@ int main(void)
 		//Movement vs Perspective Matrix
 		mat4 mvpMatrix = projection * view * rotation;
 
+
+
 		phongShader.SetMatrixUniform("mvpMatrix", mvpMatrix);
 		phongShader.SetMatrixUniform("mMatrix", rotation);		//mMatrix = model matrix
 		phongShader.SetVectorUniform("cameraPos", cam.GetPos());
-		phongShader.SetVectorUniform("lightDirection2", light2.direction);
-		phongShader.SetVectorUniform("lightColour2", light2.colour);
-		phongShader.SetVectorUniform("lightDirection1", light1.direction);
-		phongShader.SetVectorUniform("lightColour1", light1.colour);
 		phongShader.SetVectorUniform("ambientLight", ambientLight);
+
+		Draw(&phongShader);
 
 		/*Set the texture sampler uniform to the value corresponding
 		to the active texture NOT the texture ID.*/
@@ -162,3 +168,19 @@ void ObjectRender(Mesh& object)
 	object.Render();
 	object.Unbind();
 }
+
+void Draw(ShaderProgram* shader)
+{
+	for (int i = 0; i < MAX_LIGHTS && i < m_Lights.pointLights.size(); i++)
+	{
+		m_Lights.pointLightPositions[i] = m_Lights.pointLights[i].direction;
+		m_Lights.pointLightColours[i] = m_Lights.pointLights[i].colour;
+	}
+
+	int numLights = m_Lights.GetNumLights();
+	shader->SetIntergerUniform("numLights", numLights);
+	shader->SetVectorUniform("PointLightPosition", numLights, m_Lights.GetPointLightPositions());
+	shader->SetVectorUniform("PointLightColour", numLights, m_Lights.GetPointLightColours());
+}
+
+

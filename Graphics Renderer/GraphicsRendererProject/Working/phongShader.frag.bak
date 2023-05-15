@@ -80,7 +80,7 @@ void main()
 	//vec4(N, 1.0);
 	//vec4(diffuse + ambient + specular, 1.0);
 	//texture(textureSampler, _UVs);
-	
+	FragColour = vec4(1, 1, 1, 1);
 }
 
 

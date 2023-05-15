@@ -133,6 +133,15 @@ void ShaderProgram::SetVectorUniform(std::string variableName, vec3 value)
 	glUniform3f(varLoc, value.x, value.y, value.z);
 }
 
+void ShaderProgram::SetVectorUniform(std::string variableName, int count, vec3* value)
+{
+	//Variable location
+	GLint varLoc = glGetUniformLocation(shaderProgramID, variableName.c_str());
+
+	//gl uniform 3 float
+	glUniform3fv(varLoc, count, (float*)value);
+}
+
 void ShaderProgram::SetIntergerUniform(std::string variableName, int value)
 {
 	//Variable location

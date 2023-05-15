@@ -36,6 +36,8 @@ public:
 	void SetMatrixUniform(std::string variableName, mat4 value);
 	//sets the Vector uniform of a variable in a shader file
 	void SetVectorUniform(std::string variableName, vec3 value);
+
+	void SetVectorUniform(std::string variableName, int count, vec3* value);
 	//sets the Integer uniform of a variable in a shader file
 	void SetIntergerUniform(std::string variableName, int value);
 };

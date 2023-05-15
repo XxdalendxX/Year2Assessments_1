@@ -168,5 +168,8 @@
     <ClInclude Include="ImGui_Class.h">
       <Filter>Graphics Renderer\Tools\ImGui</Filter>
     </ClInclude>
+    <ClInclude Include="SceneLights.h">
+      <Filter>Graphics Renderer\Tools\Light</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
