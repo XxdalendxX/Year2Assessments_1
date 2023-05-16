@@ -1,3 +1,0 @@
-﻿  EntryPoint.cpp
-C:\Users\s214266\Documents\Git_Repositories\Year2Assessments_1\Graphics Renderer\GraphicsRendererProject\GraphicsRendererProject\EntryPoint.cpp(88,14): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-  GraphicsRendererProject.vcxproj -> C:\Users\s214266\Documents\Git_Repositories\Year2Assessments_1\Graphics Renderer\GraphicsRendererProject\x64\Debug\GraphicsRendererProject.exe

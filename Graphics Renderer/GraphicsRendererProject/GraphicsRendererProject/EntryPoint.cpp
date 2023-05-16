@@ -57,9 +57,10 @@ int main(void)
 
 	Camera cam;
 
-	Light sunLight;
-	Light pointLight;
-	vec3 ambientLight;
+	Light frontLight({-3,2,-1}, {1,1,1}, 25);
+	Light backLight({3,2,2}, {1,1,1}, 25);
+	Light colourLight({ 0,4.5f,0 }, { 0,4,0 }, 4);
+	vec3 ambientLight({ 0.25f, 0.25f, 0.25f });
 
 	Texture texture1("Obamium.png");
 
@@ -69,17 +70,12 @@ int main(void)
 	objectB.InitialiseFromFile("soulspear/soulspear.obj");
 	objectB.LoadMaterial("soulspear/soulspear.mtl");
 
-	sunLight.direction = glm::normalize(vec3(-1, -1, -1));
-	sunLight.colour = { 1,1,1 };
-	pointLight.direction = glm::normalize(vec3(1, 1, 1));
-	pointLight.colour = { 1,1,1 };
-
-	lightSources.push_back(sunLight);
-	lightSources.push_back(pointLight);
-	m_Lights.pointLights.push_back(sunLight);
-	m_Lights.pointLights.push_back(pointLight);
-	
-	ambientLight = { 0.25f, 0.25f, 0.25f };
+	lightSources.push_back(frontLight);
+	lightSources.push_back(backLight);
+	lightSources.push_back(colourLight);
+	m_Lights.pointLights.push_back(frontLight);
+	m_Lights.pointLights.push_back(backLight);
+	m_Lights.pointLights.push_back(colourLight);
 
 	glEnable(GL_DEPTH_TEST);
 
@@ -96,20 +92,16 @@ int main(void)
 		phongShader.Enable();
 
 		float time = glfwGetTime(); //gets time since application start
-		pointLight.direction = glm::normalize(vec3(glm::cos(time * 2), 0, glm::sin(time * 2)));
 
 		//ImGui Menu within application
 		ImGui::Begin("Light Settings");
-		ImGui::DragFloat3("Sunlight Direction", &sunLight.direction[0], -1.0f, -1.0f, -1.0f);
-		ImGui::DragFloat3("Sunlight Colour", &sunLight.colour[0], sunLight.colour.x, sunLight.colour.y, sunLight.colour.z);
-		ImGui::DragFloat3("Point light Direction", &pointLight.direction[0], 1.0f, 1.0f, 1.0f);
-		ImGui::DragFloat3("Point light Colour", &pointLight.colour[0], pointLight.colour.x, pointLight.colour.y, pointLight.colour.z);
+		ImGui::DragFloat3("Light1 Direction", &lightSources[0].direction[0], lightSources[0].direction.x, lightSources[0].direction.y, lightSources[0].direction.z);
+		ImGui::DragFloat3("Light1 Colour", &lightSources[0].colour[0], lightSources[0].colour.x, lightSources[0].colour.y, lightSources[0].colour.z);
+		ImGui::DragFloat3("Light2 Direction", &lightSources[1].direction[0], lightSources[1].direction.x, lightSources[1].direction.y, lightSources[1].direction.z);
+		ImGui::DragFloat3("Light2 Colour", &lightSources[1].colour[0], lightSources[1].colour.x, lightSources[1].colour.y, lightSources[1].colour.z);
+		ImGui::DragFloat3("Light3 Direction", &lightSources[2].direction[0], lightSources[2].direction.x, lightSources[2].direction.y, lightSources[2].direction.z);
+		ImGui::DragFloat3("Light3 Colour", &lightSources[2].colour[0], lightSources[2].colour.x, lightSources[2].colour.y, lightSources[2].colour.z);
 		ImGui::End();
-
-		lightSources[0].direction = sunLight.direction;
-		lightSources[0].colour = sunLight.colour;
-		lightSources[1].direction = pointLight.direction;
-		lightSources[1].colour = pointLight.colour;
 
 		//allows for the rotation of or around the object
 		mat4 rotation = glm::rotate(mat4(1), 1.0f, vec3(0, 1, 0));

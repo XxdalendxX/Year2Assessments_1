@@ -71,12 +71,12 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(SolutionDir)assimp\build\x64-$(Configuration)\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)assimp\build\x64-$(Configuration)\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)assimp\x64-$(Configuration)\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)assimp\x64-$(Configuration)\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>$(SolutionDir)assimp\build\x64-$(Configuration)\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)assimp\build\x64-$(Configuration)\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)assimp\x64-$(Configuration)\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)assimp\x64-$(Configuration)\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
