@@ -26,10 +26,10 @@ public class Punchinator : MonoBehaviour
 
     private IEnumerator Daisies()
     {
-        yield return new WaitForSeconds(0.35f);
+        yield return new WaitForSeconds(0.5f);
 
         ragdoll.RagdollOn = true;
-        rBody.AddForce(-10000, 10000, 0);
+        rBody.AddForce(-1000, 10000, 0);
 
         StartCoroutine(Downsies(tBody));
 
