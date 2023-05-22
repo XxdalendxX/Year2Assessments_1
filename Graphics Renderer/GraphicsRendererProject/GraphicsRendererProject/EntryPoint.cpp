@@ -11,7 +11,9 @@
 #include "Text.h"
 #include "Time.h"
 
+//to communicate light data to the shaders
 SceneLights m_Lights;
+//to contain all the light data in one place
 std::vector<Light> lightSources;
 
 void ObjectRender(Mesh& object);
@@ -59,23 +61,22 @@ int main(void)
 
 	Light frontLight({-3,2,-1}, {1,1,1}, 25);
 	Light backLight({3,2,2}, {1,1,1}, 25);
-	Light colourLight({ 0,4.5f,0 }, { 0,4,0 }, 4);
+	Light colourLight({ 0,6,0 }, { 0,4,0 }, 4);
 	vec3 ambientLight({ 0.25f, 0.25f, 0.25f });
 
-	Texture texture1("Obamium.png");
-
 	Mesh objectA;
+	objectA.InitialiseFromFile("soulspear/soulspear.obj");
+	objectA.LoadMaterial("soulspear/soulspear.mtl");
 	Mesh objectB;
-	objectA.CreatePyramid();
-	objectB.InitialiseFromFile("soulspear/soulspear.obj");
+	objectB.InitialiseFromFile("soulspear/soulspear.obj", vec3{2,0,2});
 	objectB.LoadMaterial("soulspear/soulspear.mtl");
+	Mesh objectC;
+	objectC.InitialiseFromFile("soulspear/soulspear.obj", vec3{ -2,0,-2 });
+	objectC.LoadMaterial("soulspear/soulspear.mtl");
 
 	lightSources.push_back(frontLight);
 	lightSources.push_back(backLight);
 	lightSources.push_back(colourLight);
-	m_Lights.pointLights.push_back(frontLight);
-	m_Lights.pointLights.push_back(backLight);
-	m_Lights.pointLights.push_back(colourLight);
 
 	glEnable(GL_DEPTH_TEST);
 
@@ -90,8 +91,6 @@ int main(void)
 		UINewFrame();
 
 		phongShader.Enable();
-
-		float time = glfwGetTime(); //gets time since application start
 
 		//ImGui Menu within application
 		ImGui::Begin("Light Settings");
@@ -136,13 +135,19 @@ int main(void)
 		to the active texture NOT the texture ID.*/
 		phongShader.SetIntergerUniform("textureSampler", 0);
 
-		texture1.Bind(0);
+		objectA.ApplyMaterial(&phongShader);
 		ObjectRender(objectA);
 		//done from texture class to avoid errors
 		Texture::Unbind(0);
-
+		 
 		objectB.ApplyMaterial(&phongShader);
 		ObjectRender(objectB);
+		//done from texture class to avoid errors
+		Texture::Unbind(0);
+		
+		objectC.ApplyMaterial(&phongShader);
+		ObjectRender(objectC);
+		//done from texture class to avoid errors
 		Texture::Unbind(0);
 
 		//renders ImGui objects frame
@@ -171,14 +176,9 @@ void ObjectRender(Mesh& object)
 
 void Draw(ShaderProgram* shader, std::vector<Light> lightSources)
 {
+	m_Lights.PushBack(lightSources);
 	
-	for (int i = 0; i < MAX_LIGHTS && i < lightSources.size(); i++)
-	{
-		m_Lights.pointLightPositions[i] = lightSources[i].direction;
-		m_Lights.pointLightColours[i] = lightSources[i].colour;
-	}
-	
-	int numLights = m_Lights.GetNumLights();
+	int numLights = lightSources.size();
 	shader->SetIntergerUniform("numLights", numLights);
 	shader->SetVectorUniform("PointLightPosition", numLights, m_Lights.GetPointLightPositions());
 	shader->SetVectorUniform("PointLightColour", numLights, m_Lights.GetPointLightColours());

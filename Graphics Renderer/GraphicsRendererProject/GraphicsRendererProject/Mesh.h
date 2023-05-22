@@ -21,6 +21,7 @@ public:
 	void CreatePyramid();
 	//initialises an imported mesh
 	void InitialiseFromFile(const char* filename);
+	void InitialiseFromFile(const char* filename, vec3 pos);
 	
 	//Generates and binds the vbo and the vao
 	void UploadMesh(std::vector<Vertex>& vertices);
@@ -54,8 +55,8 @@ protected:
 	Texture mapKs; // specular texture map
 	Texture mapBump; // normal map
 
-	int vCount; //Vertex count
-	int iCount; //Index count
+	int vCount = 0; //Vertex count
+	int iCount = 0; //Index count
 
 	bool loadedProperly = false; //Checks if mesh has loaded without problems
 };

@@ -159,6 +159,56 @@ void Mesh::InitialiseFromFile(const char* filename)
 	delete[] vertecies;
 }
 
+void Mesh::InitialiseFromFile(const char* filename, vec3 pos)
+{
+	//will read the verticies from the model
+	const aiScene* scene = aiImportFile(filename, 0);
+
+	//just use the first mesh we find for now
+	aiMesh* mesh = scene->mMeshes[0];
+
+	//extract indicies from the first mesh
+	int numFaces = mesh->mNumFaces;
+	std::vector<unsigned int> indicies;
+
+	for (int i = 0; i < numFaces; i++)
+	{
+		indicies.push_back(mesh->mFaces[i].mIndices[0]);
+		indicies.push_back(mesh->mFaces[i].mIndices[2]);
+		indicies.push_back(mesh->mFaces[i].mIndices[1]);
+
+		//generate a second triangle for quads
+		if (mesh->mFaces[i].mNumIndices == 4)
+		{
+			indicies.push_back(mesh->mFaces[i].mIndices[0]);
+			indicies.push_back(mesh->mFaces[i].mIndices[3]);
+			indicies.push_back(mesh->mFaces[i].mIndices[2]);
+		}
+	}
+
+	//extract vertex data
+	int numV = mesh->mNumVertices;
+	Vertex* vertecies = new Vertex[numV];
+	for (int i = 0; i < numV; i++)
+	{
+		vertecies[i].position = vec3(mesh->mVertices[i].x, mesh->mVertices[i].y, mesh->mVertices[i].z) + pos;
+		vertecies[i].normal = vec3(mesh->mNormals[i].x, mesh->mNormals[i].y, mesh->mNormals[i].z);
+		if (mesh->mTextureCoords[0])
+			vertecies[i].uv = vec2(mesh->mTextureCoords[0][i].x, -mesh->mTextureCoords[0][i].y);
+		else
+			vertecies[i].uv = vec2(0);
+		if (mesh->HasTangentsAndBitangents())
+			vertecies[i].tangent = vec4(mesh->mTangents[i].x, mesh->mTangents[i].y, mesh->mTangents[i].z, 1);
+	}
+
+	if (!mesh->HasTangentsAndBitangents())
+		CalculateTangents(vertecies, numV, indicies);
+
+	UploadMesh(numV, vertecies, indicies.size(), indicies.data());
+
+	delete[] vertecies;
+}
+
 
 void Mesh::LoadMaterial(const char* filename)
 {
@@ -193,9 +243,9 @@ void Mesh::LoadMaterial(const char* filename)
 			mapKd.SetDirectory((directory + mapFileName));
 			mapKd.LoadFromFile(mapKd.GetDirectory());
 			if (mapKd.CheckStatus())
-				std::cout << "Texture has loaded properly" << std::endl;
+				std::cout << "Diffuse map has loaded properly" << std::endl;
 			else
-				std::cout << "Texture has not loaded properly" << std::endl;
+				std::cout << "Diffuse map has not loaded properly" << std::endl;
 			mapKd.ReadDirectory();
 		}
 		else if (line.find("map_Ks") == 0)
@@ -205,9 +255,9 @@ void Mesh::LoadMaterial(const char* filename)
 			mapKs.SetDirectory((directory + mapFileName));
 			mapKs.LoadFromFile(mapKs.GetDirectory());
 			if (mapKs.CheckStatus())
-				std::cout << "Texture has loaded properly" << std::endl;
+				std::cout << "Specular map has loaded properly" << std::endl;
 			else
-				std::cout << "Texture has not loaded properly" << std::endl;
+				std::cout << "Specular map has not loaded properly" << std::endl;
 			mapKs.ReadDirectory();
 
 		}
@@ -218,9 +268,9 @@ void Mesh::LoadMaterial(const char* filename)
 			mapBump.SetDirectory((directory + mapFileName));
 			mapBump.LoadFromFile(mapBump.GetDirectory());
 			if (mapBump.CheckStatus())
-				std::cout << "Texture has loaded properly" << std::endl;
+				std::cout << "Normal map has loaded properly" << std::endl;
 			else
-				std::cout << "Texture has not loaded properly" << std::endl;
+				std::cout << "Normal map has not loaded properly" << std::endl;
 			mapBump.ReadDirectory();
 		}
 	}

@@ -7,21 +7,19 @@ const int MAX_LIGHTS = 4;
 
 class SceneLights
 {
-public:
-	std::vector<Light> pointLights;
-	
+public:	
 	vec3 pointLightPositions[MAX_LIGHTS];
 	vec3 pointLightColours[MAX_LIGHTS];
 
-	int GetNumLights() { return (int)pointLights.size(); }
 	vec3* GetPointLightPositions() { return &pointLightPositions[0]; }
 	vec3* GetPointLightColours() { return &pointLightColours[0]; }
-	std::vector<Light>& GetPointLights() { return pointLights; }
 
-	void PushBack(Light light, int position)
+	void PushBack(std::vector<Light> lightSources)
 	{
-		pointLights.push_back(light);
-		pointLightPositions[position] = light.direction;
-		pointLightColours[position] = light.colour;
+		for (int i = 0; i < lightSources.size(); i++)
+		{
+			pointLightPositions[i] = lightSources[i].direction;
+			pointLightColours[i] = lightSources[i].colour;
+		}
 	}
 };
