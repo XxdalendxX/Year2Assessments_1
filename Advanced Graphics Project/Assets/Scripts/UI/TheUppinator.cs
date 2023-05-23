@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class TheUppinator : MonoBehaviour
@@ -7,7 +8,12 @@ public class TheUppinator : MonoBehaviour
     [SerializeField] Ragdoll ragdoll;
 
     [SerializeField, Range(0,1000)] float height;
-    
+
+    private void Awake()
+    {
+        infoText.gameObject.SetActive(false);
+    }
+
     public void Uppsies()
     {
         ragdoll.RagdollOn = true;
@@ -47,5 +53,14 @@ public class TheUppinator : MonoBehaviour
         ragdoll.RagdollOn = false;
        
         yield return null;
+    }
+
+    [SerializeField] TMP_Text infoText;
+    public void InfoTextToggle()
+    {
+        if (infoText.gameObject.activeSelf == false)
+            infoText.gameObject.SetActive(true);
+        else
+            infoText.gameObject.SetActive(false);
     }
 }

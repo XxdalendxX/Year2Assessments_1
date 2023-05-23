@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -9,6 +10,11 @@ public class CameraMovement : MonoBehaviour
     Vector3 camPos;
     Quaternion camRot;
 
+    private void Awake()
+    {
+        infoTextL.gameObject.SetActive(false);
+        infoTextR.gameObject.SetActive(false);
+    }
 
     private void Update()
     {
@@ -89,5 +95,23 @@ public class CameraMovement : MonoBehaviour
         m_Camera.position = Vector3.Lerp(oldPos, position, 10);
         m_Camera.Rotate(rotation);
 
+    }
+
+    [SerializeField] TMP_Text infoTextL;
+    public void InfoTextToggleL()
+    {
+        if (infoTextL.gameObject.activeSelf == false)
+            infoTextL.gameObject.SetActive(true);
+        else
+            infoTextL.gameObject.SetActive(false);
+    }
+
+    [SerializeField] TMP_Text infoTextR;
+    public void InfoTextToggleR()
+    {
+        if (infoTextR.gameObject.activeSelf == false)
+            infoTextR.gameObject.SetActive(true);
+        else
+            infoTextR.gameObject.SetActive(false);
     }
 }

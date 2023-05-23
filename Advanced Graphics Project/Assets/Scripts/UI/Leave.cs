@@ -10,6 +10,11 @@ public class Leave : MonoBehaviour
     [SerializeField] TMP_Text nvm2;
     private IEnumerator yeild;
 
+    private void Awake()
+    {
+        infoText.gameObject.SetActive(false);
+    }
+
     public void Gone()
     {
         trolled.gameObject.SetActive(true);
@@ -26,5 +31,14 @@ public class Leave : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
 
         Application.Quit();
+    }
+
+    [SerializeField] TMP_Text infoText;
+    public void InfoTextToggle()
+    {
+        if (infoText.gameObject.activeSelf == false)
+            infoText.gameObject.SetActive(true);
+        else
+            infoText.gameObject.SetActive(false);
     }
 }
